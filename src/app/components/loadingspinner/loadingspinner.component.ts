@@ -10,7 +10,7 @@ export class LoadingspinnerComponent {
   ngOnInit() {
     setTimeout(() => {
       this.isloaded = false;
-    }, 3000);
+    }, 1000);
     
   }
 }

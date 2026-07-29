@@ -1,18 +1,16 @@
-
-
 body {
   font-family: 'Space Mono', monospace;
   
 }
 .grow-on-hover:hover {
   transform: scale(0.9); /* Grow effect */
-  border: 4px solid rgb(33, 1, 33); /* Purple border */
+  border: 4px solid rgb(120, 156, 134); /* light green border */
   box-shadow: 0 0 15px rgb(33, 1, 33); /* Optional: Adds a glow effect */
   transition: transform 0.3s ease, border 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for the effects */
 }
 
 .svg-text {
-  font-size: 550px; /* Updated font size to 250px */
+  font-size: 200px; /* Updated font size to 250px */
   font-family:monospace;
   stroke-dasharray: 2000; /* Adjusted to better fit the new font size */
   stroke-dashoffset: 2000;
