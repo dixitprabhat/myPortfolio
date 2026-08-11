@@ -13,17 +13,17 @@
 <!-- Backdrop Modal Overlay -->
 @if (isPopupOpen()) {
   <div
-    class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-md animate-fade-up"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/70 dark:bg-slate-950/85 p-4 backdrop-blur-md animate-fade-up"
     role="dialog"
     aria-modal="true"
     aria-labelledby="modal-title">
-    <div class="relative w-full max-w-lg rounded-2xl border border-white/15 bg-slate-900 p-6 sm:p-8 shadow-2xl">
+    <div class="glass-card relative w-full max-w-lg shadow-2xl !p-6 sm:!p-8" style="background-color: var(--bg-modal)">
       <!-- Close Icon Button -->
       <button
         type="button"
         (click)="closePopup()"
         aria-label="Close modal"
-        class="absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-slate-800 text-slate-400 transition hover:bg-slate-700 hover:text-white">
+        class="btn-outline !p-0 absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-full">
         <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
         </svg>
@@ -31,19 +31,19 @@
 
       <!-- Content -->
       <div class="flex items-center gap-3 mb-4">
-        <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-accent/20 text-brand-accent-light">
+        <div class="theme-icon-box flex h-10 w-10 items-center justify-center rounded-xl border text-indigo-600 dark:text-indigo-400">
           <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
           </svg>
         </div>
-        <h2 id="modal-title" class="text-xl font-bold text-white tracking-tight">Curriculum Vitae — Prabhat Dixit</h2>
+        <h2 id="modal-title" class="text-xl font-bold tracking-tight" style="color: var(--text-heading)">Curriculum Vitae — Prabhat Dixit</h2>
       </div>
 
-      <p class="text-sm leading-relaxed text-slate-300">
+      <p class="text-sm leading-relaxed" style="color: var(--text-body)">
         Thank you for reviewing my profile! You can download my complete CV in PDF format detailing enterprise project experience, technical stack, and educational credentials.
       </p>
 
-      <div class="mt-8 flex flex-col sm:flex-row items-center justify-end gap-3 pt-4 border-t border-white/10">
+      <div class="mt-8 flex flex-col sm:flex-row items-center justify-end gap-3 pt-4 border-t" style="border-color: var(--border-subtle)">
         <button
           type="button"
           (click)="closePopup()"

@@ -1,5 +1,5 @@
 <header>
-  <nav class="fixed top-0 left-0 z-50 w-full border-b border-white/10 bg-slate-950/80 backdrop-blur-xl transition-all duration-300" aria-label="Main navigation">
+  <nav class="fixed top-0 left-0 z-50 w-full theme-nav border-b backdrop-blur-xl transition-all duration-300" aria-label="Main navigation">
     <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
       <!-- Brand Logo & Identity -->
       <a
@@ -7,12 +7,12 @@
         (click)="scrollToElement('home'); $event.preventDefault()"
         class="group flex items-center gap-3 focus:outline-none"
         aria-label="Prabhat Dixit Home">
-        <div class="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl border border-brand-accent/30 bg-slate-900 p-1 shadow-md transition-all duration-300 group-hover:border-brand-accent group-hover:shadow-glow-accent">
+        <div class="theme-icon-box relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl border p-1 shadow-sm transition-all duration-300 group-hover:border-indigo-500 group-hover:shadow-glow">
           <img src="assets/images/synergy-1.png" class="h-8 w-auto object-contain" alt="Prabhat Dixit logo" />
         </div>
         <div class="flex flex-col">
-          <span class="text-base font-bold tracking-tight text-white transition-colors group-hover:text-brand-accent-light">Prabhat Dixit</span>
-          <span class="text-xs font-medium text-slate-400">Frontend Developer</span>
+          <span class="text-base font-bold tracking-tight transition-colors group-hover:text-indigo-600 dark:group-hover:text-indigo-400" style="color: var(--text-heading)">Prabhat Dixit</span>
+          <span class="text-xs font-medium" style="color: var(--text-muted)">MEAN Stack Developer</span>
         </div>
       </a>
 
@@ -37,7 +37,8 @@
           type="button"
           (click)="toggleTheme()"
           [attr.aria-label]="themeService.currentTheme() === 'dark' ? 'Switch to Light Theme' : 'Switch to Dark Theme'"
-          class="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-slate-900/60 text-slate-300 transition-all hover:border-brand-accent hover:text-white hover:shadow-glow-accent focus:outline-none">
+          class="btn-outline !px-0 !py-0 flex h-9 w-9 items-center justify-center rounded-full transition-all focus:outline-none"
+          title="Toggle Light/Dark Theme">
           @if (themeService.currentTheme() === 'dark') {
             <!-- Sun Icon -->
             <svg class="h-4 w-4 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -45,7 +46,7 @@
             </svg>
           } @else {
             <!-- Moon Icon -->
-            <svg class="h-4 w-4 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg class="h-4 w-4 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
             </svg>
           }
@@ -69,13 +70,13 @@
           type="button"
           (click)="toggleTheme()"
           [attr.aria-label]="themeService.currentTheme() === 'dark' ? 'Switch to Light Theme' : 'Switch to Dark Theme'"
-          class="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-slate-900/60 text-slate-300">
+          class="btn-outline !px-0 !py-0 flex h-9 w-9 items-center justify-center rounded-lg">
           @if (themeService.currentTheme() === 'dark') {
             <svg class="h-4 w-4 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
             </svg>
           } @else {
-            <svg class="h-4 w-4 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg class="h-4 w-4 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
             </svg>
           }
@@ -87,7 +88,7 @@
           [attr.aria-expanded]="menuOpen()"
           aria-controls="mobile-navbar-menu"
           aria-label="Toggle navigation menu"
-          class="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-slate-900 text-slate-300 transition hover:bg-slate-800 focus:outline-none">
+          class="btn-outline !px-0 !py-0 inline-flex h-10 w-10 items-center justify-center rounded-xl transition focus:outline-none">
           @if (menuOpen()) {
             <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -103,7 +104,7 @@
 
     <!-- Mobile Menu Drawer -->
     @if (menuOpen()) {
-      <div id="mobile-navbar-menu" class="border-b border-white/10 bg-slate-950/95 p-4 backdrop-blur-2xl md:hidden animate-fade-up">
+      <div id="mobile-navbar-menu" class="theme-nav border-b p-4 backdrop-blur-2xl md:hidden animate-fade-up">
         <ul class="flex flex-col gap-2">
           @for (link of navLinks; track link.id) {
             <li>
@@ -111,12 +112,13 @@
                 type="button"
                 (click)="scrollToElement(link.id)"
                 [class.nav-link-active]="activeLink() === link.id"
-                class="block w-full rounded-xl px-4 py-3 text-left font-medium text-slate-200 transition hover:bg-white/5 hover:text-white">
+                class="block w-full rounded-xl px-4 py-3 text-left font-medium transition hover:bg-indigo-500/10 hover:text-indigo-600 dark:hover:text-indigo-400"
+                style="color: var(--text-body)">
                 {{ link.label }}
               </button>
             </li>
           }
-          <li class="mt-2 pt-2 border-t border-white/10">
+          <li class="mt-2 pt-2 border-t" style="border-color: var(--border-subtle)">
             <a
               href="assets/files/Prabhat Dixit.pdf"
               target="_blank"

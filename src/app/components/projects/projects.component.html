@@ -1,105 +1,178 @@
-<section id="projects" class="section-shell bg-slate-950/40">
-  <div class="mx-auto max-w-7xl">
+<section id="projects" class="section-shell-alt">
+  <div class="mx-auto max-w-6xl">
     <div class="mb-12 text-center">
-      <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl border border-brand-accent/30 bg-brand-accent/10 text-brand-accent-light shadow-glow-accent">
+      <div class="theme-icon-box mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl border text-indigo-600 dark:text-indigo-400 shadow-sm">
         <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
         </svg>
       </div>
       <h2 class="section-heading">Featured Projects</h2>
       <p class="section-subtitle">
-        Selected enterprise applications and frontend projects showcasing clean architecture, responsive UX, and real-world problem solving.
+        Selected enterprise full-stack & web applications showcasing MongoDB databases, Express APIs, Angular frontends, and real-world problem solving.
       </p>
     </div>
 
-    <!-- Filter Tablist -->
-    <div class="mb-10 flex flex-wrap justify-center gap-2" role="tablist" aria-label="Project category filters">
+    <!-- Category Filter Pills -->
+    <div class="mb-8 flex flex-wrap justify-center gap-2" role="tablist" aria-label="Project category filters">
       @for (filter of filters; track filter.id) {
         <button
           type="button"
           role="tab"
           [attr.aria-selected]="activeFilter() === filter.id"
           [class.filter-btn-active]="activeFilter() === filter.id"
-          class="filter-btn rounded-full px-6 py-2.5"
+          class="filter-btn rounded-full px-5 py-2"
           (click)="setFilter(filter.id)">
           {{ filter.label }}
         </button>
       }
     </div>
 
-    @if (filteredProjects().length === 0) {
-      <div class="rounded-2xl border border-white/10 bg-slate-900/50 p-12 text-center text-slate-400">
-        No projects found in this category.
+    <!-- Dynamic Projects Carousel (Matches Skills Container Architecture) -->
+    <div class="relative glass-card p-6 sm:p-8" (mouseenter)="pauseAutoSlide()" (mouseleave)="resumeAutoSlide()">
+      <!-- Carousel Header Controls -->
+      <div class="mb-6 flex items-center justify-between border-b pb-4" style="border-color: var(--border-subtle)">
+        <div class="flex items-center gap-2">
+          <span class="inline-block h-2 w-2 rounded-full bg-sky-500"></span>
+          <span class="text-xs font-mono font-semibold uppercase tracking-wider" style="color: var(--text-muted)">
+            @if (activeFilter() === 'all') { Featured Portfolio Projects }
+            @else if (activeFilter() === 'fullstack') { Enterprise Full-Stack Solutions }
+            @else { Frontend Applications }
+          </span>
+          <span class="badge-tag !px-2.5 !py-0.5 font-mono text-[11px]">
+            {{ filteredProjects().length }} {{ filteredProjects().length === 1 ? 'Project' : 'Projects' }}
+          </span>
+        </div>
+
+        <!-- Previous / Next Controls -->
+        <div class="flex items-center gap-2">
+          <button
+            type="button"
+            (click)="prevSlide()"
+            aria-label="Previous Projects Slide"
+            [disabled]="totalPages() <= 1"
+            class="btn-outline !px-0 !py-0 flex h-9 w-9 items-center justify-center rounded-xl transition disabled:opacity-30 disabled:cursor-not-allowed">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+
+          <span class="text-xs font-mono font-medium px-1" style="color: var(--text-muted)">
+            {{ currentIndex() + 1 }} / {{ totalPages() }}
+          </span>
+
+          <button
+            type="button"
+            (click)="nextSlide()"
+            aria-label="Next Projects Slide"
+            [disabled]="totalPages() <= 1"
+            class="btn-outline !px-0 !py-0 flex h-9 w-9 items-center justify-center rounded-xl transition disabled:opacity-30 disabled:cursor-not-allowed">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
       </div>
-    } @else {
-      <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-        @for (project of filteredProjects(); track project.title) {
-          <article class="project-card group">
-            <div class="relative overflow-hidden aspect-video bg-slate-950">
-              <img
-                [src]="project.image"
-                [alt]="project.title + ' preview image'"
-                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                loading="lazy"
-                decoding="async" />
-              <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-60"></div>
-              
-              @if (project.featured) {
-                <span class="absolute top-3 right-3 rounded-full border border-brand-accent/30 bg-brand-accent/80 px-3 py-1 text-xs font-semibold text-white shadow-md backdrop-blur-md">
-                  Featured
-                </span>
-              }
-            </div>
 
-            <div class="flex flex-1 flex-col p-6">
-              <h3 class="text-xl font-bold text-white tracking-tight group-hover:text-brand-accent-light transition-colors">
-                {{ project.title }}
-              </h3>
-              
-              <p class="mt-3 flex-1 text-sm leading-relaxed text-slate-400">
-                {{ project.description }}
-              </p>
+      <!-- Project Grid -->
+      @if (filteredProjects().length === 0) {
+        <div class="p-12 text-center" style="color: var(--text-muted)">
+          No projects found in this category.
+        </div>
+      } @else {
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          @for (project of visibleProjects(); track project.title) {
+            <article class="theme-icon-box group flex flex-col justify-between h-full rounded-2xl border overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-sky-400 hover:shadow-glow">
+              <div>
+                <!-- Image Header -->
+                <div class="relative overflow-hidden aspect-[16/10] w-full bg-slate-950/90 flex items-center justify-center border-b" style="border-color: var(--border-subtle)">
+                  <img
+                    [src]="project.image"
+                    [alt]="project.title + ' preview image'"
+                    [class]="project.image.includes('ELogo') || project.image.includes('ELOGO') ? 'h-full w-full object-contain p-4' : 'h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105'"
+                    loading="lazy"
+                    decoding="async" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent opacity-40"></div>
 
-              <!-- Tags -->
-              <ul class="mt-6 flex flex-wrap gap-2" aria-label="Technologies used">
-                @for (tag of project.tags; track tag) {
-                  <li class="badge-tag">
-                    {{ tag }}
-                  </li>
-                }
-              </ul>
+                  @if (project.featured) {
+                    <span class="absolute top-3 right-3 rounded-full border border-sky-500/30 bg-sky-600/90 px-2.5 py-0.5 text-[11px] font-semibold text-white shadow-md backdrop-blur-md">
+                      Featured
+                    </span>
+                  }
+                </div>
 
-              <!-- Action Links -->
-              <div class="mt-6 flex items-center gap-3 pt-4 border-t border-white/10">
-                @if (project.demoUrl) {
-                  <a
-                    [href]="project.demoUrl"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="btn-primary text-xs px-4 py-2 flex-1">
-                    Live Demo
-                    <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                  </a>
-                }
-                @if (project.githubUrl) {
-                  <a
-                    [href]="project.githubUrl"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="btn-outline text-xs px-4 py-2 flex-1">
-                    GitHub
-                    <svg class="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 24 24">
-                      <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
-                    </svg>
-                  </a>
-                }
+                <!-- Body Content -->
+                <div class="p-5 flex flex-col">
+                  <h3 class="text-lg font-bold tracking-tight transition-colors group-hover:text-sky-500 dark:group-hover:text-sky-400" style="color: var(--text-heading)">
+                    {{ project.title }}
+                  </h3>
+
+                  <p class="mt-2 text-xs leading-relaxed line-clamp-3" style="color: var(--text-body)">
+                    {{ project.description }}
+                  </p>
+
+                  <!-- Tags -->
+                  <ul class="mt-4 flex flex-wrap gap-1.5" aria-label="Technologies used">
+                    @for (tag of project.tags; track tag) {
+                      <li class="badge-tag !px-2.5 !py-0.5 text-[11px]">
+                        {{ tag }}
+                      </li>
+                    }
+                  </ul>
+                </div>
               </div>
-            </div>
-          </article>
-        }
-      </div>
-    }
+
+              <!-- Footer Action Links -->
+              <div class="p-5 pt-0 mt-2">
+                <div class="flex items-center gap-2.5 pt-3 border-t" style="border-color: var(--border-subtle)">
+                  @if (project.demoUrl) {
+                    <a
+                      [href]="project.demoUrl"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="btn-primary text-xs px-3.5 py-2 flex-1">
+                      Live Demo
+                      <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    </a>
+                  }
+                  @if (project.githubUrl) {
+                    <a
+                      [href]="project.githubUrl"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="btn-outline text-xs px-3.5 py-2 flex-1">
+                      GitHub
+                      <svg class="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+                      </svg>
+                    </a>
+                  }
+                </div>
+              </div>
+            </article>
+          }
+        </div>
+      }
+
+      <!-- Pagination Dots Indicator -->
+      @if (totalPages() > 1) {
+        <div class="mt-6 flex items-center justify-center gap-1.5 pt-4 border-t" style="border-color: var(--border-subtle)">
+          @for (page of getPagesArray(); track page) {
+            <button
+              type="button"
+              (click)="goToSlide(page)"
+              [attr.aria-label]="'Go to project slide ' + (page + 1)"
+              class="h-2 rounded-full transition-all duration-300"
+              [class.w-6]="currentIndex() === page"
+              [class.bg-sky-500]="currentIndex() === page"
+              [class.w-2]="currentIndex() !== page"
+              [class.bg-zinc-400]="currentIndex() !== page"
+              [class.opacity-40]="currentIndex() !== page">
+            </button>
+          }
+        </div>
+      }
+    </div>
   </div>
 </section>

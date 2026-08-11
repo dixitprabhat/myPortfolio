@@ -4,68 +4,246 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* Cursor Light Mode Palette */
+  --bg-main: #fafafa;
+  --bg-section-alt: #f4f4f5;
+  --bg-card: #ffffff;
+  --bg-card-hover: #ffffff;
+  --bg-nav: rgba(250, 250, 250, 0.85);
+  --bg-modal: #ffffff;
+  --bg-icon: #f4f4f5;
+  
+  --border-subtle: #e4e4e7;
+  --border-card: #e4e4e7;
+  --border-card-hover: #a1a1aa;
+  --border-nav: #e4e4e7;
+  
+  --text-heading: #09090b;
+  --text-body: #3f3f46;
+  --text-muted: #71717a;
+  --text-accent: #0284c7;
+  
+  --badge-bg: #f4f4f5;
+  --badge-border: #e4e4e7;
+  --badge-text: #18181b;
+  
+  --btn-primary-bg: #09090b;
+  --btn-primary-text: #ffffff;
+  --btn-primary-hover-bg: #27272a;
+  
+  --btn-outline-bg: #ffffff;
+  --btn-outline-border: #e4e4e7;
+  --btn-outline-text: #09090b;
+  --btn-outline-hover-bg: #f4f4f5;
+  --btn-outline-hover-border: #a1a1aa;
+  --btn-outline-hover-text: #000000;
+  
+  --input-bg: #ffffff;
+  --input-border: #e4e4e7;
+  --input-text: #09090b;
+  
+  --shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+  --shadow-glow: 0 0 25px -5px rgba(2, 132, 199, 0.15);
+
+  color-scheme: light;
+}
+
+.dark {
+  /* Cursor Dark Mode (Obsidian / High Contrast) Palette */
+  --bg-main: #0a0a0c;
+  --bg-section-alt: #121215;
+  --bg-card: rgba(24, 24, 27, 0.75);
+  --bg-card-hover: rgba(39, 39, 42, 0.85);
+  --bg-nav: rgba(10, 10, 12, 0.85);
+  --bg-modal: #18181b;
+  --bg-icon: #18181b;
+  
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-card: #27272a;
+  --border-card-hover: #3f3f46;
+  --border-nav: rgba(255, 255, 255, 0.1);
+  
+  --text-heading: #ffffff;
+  --text-body: #a1a1aa;
+  --text-muted: #71717a;
+  --text-accent: #38bdf8;
+  
+  --badge-bg: rgba(255, 255, 255, 0.06);
+  --badge-border: rgba(255, 255, 255, 0.12);
+  --badge-text: #f4f4f5;
+  
+  --btn-primary-bg: #ffffff;
+  --btn-primary-text: #0a0a0c;
+  --btn-primary-hover-bg: #f4f4f5;
+  
+  --btn-outline-bg: rgba(24, 24, 27, 0.6);
+  --btn-outline-border: #27272a;
+  --btn-outline-text: #f4f4f5;
+  --btn-outline-hover-bg: rgba(255, 255, 255, 0.1);
+  --btn-outline-hover-border: #52525b;
+  --btn-outline-hover-text: #ffffff;
+  
+  --input-bg: #18181b;
+  --input-border: #27272a;
+  --input-text: #ffffff;
+  
+  --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 30px -5px rgba(56, 189, 248, 0.25);
+
+  color-scheme: dark;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
-    color-scheme: dark light;
   }
 
   body {
-    @apply bg-brand-bg text-slate-100 font-sans antialiased transition-colors duration-300 selection:bg-brand-accent/30 selection:text-white;
+    background-color: var(--bg-main);
+    color: var(--text-body);
+    @apply font-sans antialiased transition-colors duration-300 selection:bg-sky-500/30 selection:text-sky-300;
   }
 
   /* Focus ring global styling for WCAG compliance */
   :focus-visible {
-    @apply outline-none ring-2 ring-brand-accent ring-offset-2 ring-offset-brand-bg;
+    @apply outline-none ring-2 ring-sky-400 ring-offset-2;
+    ring-offset-color: var(--bg-main);
   }
 }
 
 @layer components {
   .section-shell {
-    @apply relative px-4 sm:px-6 lg:px-12 py-16 md:py-24 bg-brand-bg;
+    background-color: var(--bg-main);
+    @apply relative px-4 sm:px-6 lg:px-12 py-16 md:py-24 transition-colors duration-300;
+  }
+
+  .section-shell-alt {
+    background-color: var(--bg-section-alt);
+    @apply relative px-4 sm:px-6 lg:px-12 py-16 md:py-24 transition-colors duration-300;
   }
 
   .section-heading {
-    @apply text-3xl sm:text-4xl md:text-5xl font-extrabold text-white text-center tracking-tight;
+    color: var(--text-heading);
+    @apply text-3xl sm:text-4xl md:text-5xl font-extrabold text-center tracking-tight transition-colors duration-300;
   }
 
   .section-subtitle {
-    @apply mt-4 max-w-3xl mx-auto text-center text-slate-400 text-base sm:text-lg leading-relaxed font-normal;
+    color: var(--text-muted);
+    @apply mt-4 max-w-3xl mx-auto text-center text-base sm:text-lg leading-relaxed font-normal transition-colors duration-300;
   }
 
   .glass-card {
-    @apply relative rounded-2xl border border-white/10 bg-slate-900/60 backdrop-blur-md p-6 sm:p-8 transition-all duration-300 hover:border-brand-accent/40 hover:bg-slate-900/80 hover:shadow-glow-accent;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-card);
+    box-shadow: var(--shadow-card);
+    @apply relative rounded-2xl backdrop-blur-md p-6 sm:p-8 transition-all duration-300;
+  }
+
+  .glass-card:hover {
+    background-color: var(--bg-card-hover);
+    border-color: var(--border-card-hover);
+    box-shadow: var(--shadow-glow);
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2.5 rounded-full px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-brand-accent to-brand-secondary shadow-lg shadow-brand-accent/25 transition-all duration-300 hover:shadow-glow-accent hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent;
+    background-color: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
+    @apply inline-flex items-center justify-center gap-2.5 rounded-full px-6 py-3 text-sm font-semibold shadow-md transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400;
   }
 
   .btn-outline {
-    @apply inline-flex items-center justify-center gap-2.5 rounded-full px-6 py-3 text-sm font-semibold text-slate-200 border border-white/20 bg-slate-900/40 backdrop-blur-sm transition-all duration-300 hover:border-brand-accent hover:text-white hover:bg-brand-accent/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent;
+    background-color: var(--btn-outline-bg);
+    border: 1px solid var(--btn-outline-border);
+    color: var(--btn-outline-text);
+    @apply inline-flex items-center justify-center gap-2.5 rounded-full px-6 py-3 text-sm font-semibold backdrop-blur-sm transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400;
+  }
+
+  .btn-outline:hover {
+    background-color: var(--btn-outline-hover-bg);
+    border-color: var(--btn-outline-hover-border);
+    color: var(--btn-outline-hover-text);
   }
 
   .nav-link {
-    @apply relative text-sm font-medium text-slate-300 transition-colors duration-200 hover:text-white focus:outline-none focus-visible:text-brand-accent-light;
+    color: var(--text-muted);
+    @apply relative text-sm font-medium transition-colors duration-200 focus:outline-none focus-visible:text-sky-400;
+  }
+
+  .nav-link:hover {
+    color: var(--text-heading);
   }
 
   .nav-link-active {
-    @apply text-brand-accent-light font-semibold;
+    color: var(--text-heading) !important;
+    @apply font-bold;
   }
 
   .filter-btn {
-    @apply px-4 sm:px-6 py-2.5 text-xs sm:text-sm font-semibold tracking-wide text-slate-300 border border-white/10 bg-slate-900/50 backdrop-blur-sm transition-all duration-200 hover:border-brand-accent hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent;
+    background-color: var(--btn-outline-bg);
+    border: 1px solid var(--btn-outline-border);
+    color: var(--btn-outline-text);
+    @apply px-4 sm:px-6 py-2.5 text-xs sm:text-sm font-semibold tracking-wide backdrop-blur-sm transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400;
+  }
+
+  .filter-btn:hover {
+    border-color: var(--border-card-hover);
+    color: var(--text-heading);
   }
 
   .filter-btn-active {
-    @apply border-brand-accent bg-brand-accent/20 text-white shadow-glow-accent;
+    background-color: var(--btn-primary-bg) !important;
+    border-color: var(--btn-primary-bg) !important;
+    color: var(--btn-primary-text) !important;
+    box-shadow: var(--shadow-card);
   }
 
   .project-card {
-    @apply flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-slate-900/60 backdrop-blur-md shadow-xl transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-accent/50 hover:shadow-glow-accent;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-card);
+    box-shadow: var(--shadow-card);
+    @apply flex flex-col overflow-hidden rounded-2xl backdrop-blur-md transition-all duration-300 hover:-translate-y-1.5;
+  }
+
+  .project-card:hover {
+    background-color: var(--bg-card-hover);
+    border-color: var(--border-card-hover);
+    box-shadow: var(--shadow-glow);
   }
 
   .badge-tag {
-    @apply inline-flex items-center rounded-full bg-brand-accent/15 px-3 py-1 text-xs font-medium text-brand-accent-light border border-brand-accent/20;
+    background-color: var(--badge-bg);
+    border: 1px solid var(--badge-border);
+    color: var(--badge-text);
+    @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-medium transition-colors duration-200;
+  }
+
+  .theme-nav {
+    background-color: var(--bg-nav);
+    border-color: var(--border-nav);
+  }
+
+  .theme-input {
+    background-color: var(--input-bg);
+    border-color: var(--input-border);
+    color: var(--input-text);
+  }
+
+  .theme-icon-box {
+    background-color: var(--bg-icon);
+    border-color: var(--border-subtle);
+  }
+
+  .dev-grid-bg {
+    background-image: radial-gradient(rgba(161, 161, 170, 0.15) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .terminal-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-card);
+    box-shadow: var(--shadow-card);
+    @apply rounded-2xl overflow-hidden font-mono text-xs sm:text-sm leading-relaxed backdrop-blur-md transition-all duration-300;
   }
 }
+

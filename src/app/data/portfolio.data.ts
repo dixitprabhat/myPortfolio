@@ -38,15 +38,15 @@ export interface Skill {
 
 export const PORTFOLIO = {
   name: 'Prabhat Dixit',
-  role: 'Frontend Web Developer',
-  tagline: 'Crafting performant, accessible, and elegant Web Applications with Angular & TypeScript',
+  role: 'MEAN Stack Developer',
+  tagline: 'Architecting scalable full-stack web applications with MongoDB, Express.js, Angular, Node.js & TypeScript',
   email: 'dxtprabh87@gmail.com',
   phone: '+91 9598 208 182',
   location: 'Delhi, UP, India',
   github: 'https://github.com/theprabhuofficial',
   linkedin: 'https://www.linkedin.com/in/dixitprabhat/',
   summary:
-    'Results-driven Frontend Developer with experience building enterprise web applications, interactive dashboards, and responsive web experiences using Angular, TypeScript, RxJS, and modern CSS systems. Focused on scalable frontend architecture, accessibility (WCAG), performance optimization, and intuitive UX.',
+    'Results-driven MEAN Stack Developer with hands-on experience engineering enterprise web applications, RESTful microservices, interactive dashboards, and database architectures using MongoDB, Express.js, Angular, Node.js, and TypeScript. Passionate about end-to-end full-stack architecture, scalable backends, clean code, accessibility, and high-performance UX.',
   resumePath: 'assets/files/Prabhat Dixit.pdf',
   availability: 'Available for Opportunities',
 } as const;
@@ -143,41 +143,26 @@ export const QUALIFICATIONS: Qualification[] = [
       'Focused on Education and English Literature, developing critical thinking, communication, and structured analytical skill sets.',
     badge: 'Undergraduate Degree',
   },
-  {
-    title: 'Intermediate (Class XII)',
-    period: '2016',
-    institution: 'U.P. Board — Inter College, Powayan',
-    description: 'Higher Secondary Education with focus on academics and mathematical reasoning.',
-  },
-  {
-    title: 'High School (Class X)',
-    period: '2014',
-    institution: 'U.P. Board — Saraswati Vidya Mandir, Powayan',
-    description: 'Secondary School Education establishing analytical and science foundations.',
-  },
 ];
 
 export const SKILLS: Skill[] = [
   { name: 'Angular', icon: 'assets/images/programing.png', category: 'frontend' },
-  { name: 'TypeScript', icon: 'assets/images/java-script.png', category: 'frontend' },
+  { name: 'NodeJS', icon: 'assets/images/node.png', category: 'backend' },
+  { name: 'ExpressJS', icon: 'assets/images/Express.png', category: 'backend' },
+  { name: 'NestJS', icon: 'assets/images/nestJs.png', category: 'backend' },
+  { name: 'TypeScript', icon: 'assets/images/TypeScript.png', category: 'frontend' },
   { name: 'JavaScript (ES6+)', icon: 'assets/images/java-script.png', category: 'frontend' },
-  { name: 'Node.js', icon: 'assets/images/node.png', category: 'backend' },
+  { name: 'MySQL', icon: 'assets/images/SQL.png', category: 'database' },
   { name: 'MongoDB', icon: 'assets/images/mongo.png', category: 'database' },
-  { name: 'SQL / MySQL', icon: 'assets/images/SQL.png', category: 'database' },
-  { name: 'C Language', icon: 'assets/images/clang.png', category: 'backend' },
-  {
-    name: 'Git & GitHub',
-    icon: 'assets/images/githublogo.png',
-    category: 'tools',
-    url: 'https://github.com/theprabhuofficial',
-  },
+  { name: 'Git', icon: 'assets/images/githublogo.png', category: 'tools' },
+  { name: 'Postman', icon: 'assets/images/postman.png', category: 'tools' },
 ];
 
 export const NAV_LINKS = [
   { id: 'home', label: 'Home' },
-  { id: 'education', label: 'Education' },
-  { id: 'skills', label: 'Skills' },
+  { id: 'skills', label: 'Skills & Stack' },
   { id: 'projects', label: 'Projects' },
   { id: 'experience', label: 'Experience' },
+  { id: 'education', label: 'Education' },
   { id: 'contact', label: 'Contact' },
 ] as const;
