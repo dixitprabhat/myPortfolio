@@ -1,51 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, computed, signal, ChangeDetectionStrategy } from '@angular/core';
+import { PROJECTS, ProjectCategory } from '../../data/portfolio.data';
+
+type FilterOption = 'all' | ProjectCategory;
 
 @Component({
   selector: 'app-projects',
+  standalone: true,
   templateUrl: './projects.component.html',
-  styleUrl: './projects.component.css'
+  styleUrl: './projects.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProjectsComponent {
-  
-  showAllProjects() {
-    document.querySelectorAll('.frontend-projects, .backend-projects, .wordpress-projects, .fullstack-projects').forEach((element: Element) => {
-      (element as HTMLElement).style.display = 'block';
-    });
-  }
+  readonly projects = PROJECTS;
 
-  showFrontendProjects() {
-    document.querySelectorAll('.frontend-projects').forEach((element: Element) => {
-      (element as HTMLElement).style.display = 'block';
-    });
-    document.querySelectorAll('.backend-projects, .wordpress-projects, .fullstack-projects, .all-projects').forEach((element: Element) => {
-      (element as HTMLElement).style.display = 'none';
-    });
-  }
+  readonly filters: { id: FilterOption; label: string }[] = [
+    { id: 'all', label: 'All Work' },
+    { id: 'fullstack', label: 'Enterprise & Full Stack' },
+    { id: 'frontend', label: 'Frontend Applications' },
+  ];
 
-  showBackendProjects() {
-    document.querySelectorAll('.backend-projects').forEach((element: Element) => {
-      (element as HTMLElement).style.display = 'block';
-    });
-    document.querySelectorAll('.frontend-projects, .wordpress-projects, .fullstack-projects, .all-projects').forEach((element: Element) => {
-      (element as HTMLElement).style.display = 'none';
-    });
-  }
+  readonly activeFilter = signal<FilterOption>('all');
 
-  showFullStackProjects() {
-    document.querySelectorAll('.fullstack-projects').forEach((element: Element) => {
-      (element as HTMLElement).style.display = 'block';
-    });
-    document.querySelectorAll('.frontend-projects, .wordpress-projects,.backend-projects,.all-projects').forEach((element: Element) => {
-      (element as HTMLElement).style.display = 'none';
-    });
-  }
+  readonly filteredProjects = computed(() => {
+    const filter = this.activeFilter();
+    if (filter === 'all') {
+      return this.projects;
+    }
+    return this.projects.filter((project) => project.category === filter);
+  });
 
-  showWordPressProjects() {
-    document.querySelectorAll('.wordpress-projects').forEach((element: Element) => {
-      (element as HTMLElement).style.display = 'block';
-    });
-    document.querySelectorAll('.frontend-projects, .backend-projects, .all-projects, .fullstack-projects ').forEach((element: Element) => {
-      (element as HTMLElement).style.display = 'none';
-    });
+  setFilter(filter: FilterOption): void {
+    this.activeFilter.set(filter);
   }
 }

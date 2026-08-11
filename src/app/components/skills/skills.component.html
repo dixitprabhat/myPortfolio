@@ -1,0 +1,52 @@
+<section class="section-shell">
+  <div class="mx-auto max-w-6xl">
+    <div class="mb-12 text-center">
+      <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl border border-brand-accent/30 bg-brand-accent/10 text-brand-accent-light shadow-glow-accent">
+        <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+        </svg>
+      </div>
+      <h2 class="section-heading">Technical Skills & Ecosystem</h2>
+      <p class="section-subtitle">
+        Core technologies, frameworks, and database architectures I leverage to construct robust, high-performance web applications.
+      </p>
+    </div>
+
+    <!-- Category Pill Filter -->
+    <div class="mb-10 flex flex-wrap justify-center gap-2">
+      @for (cat of categories; track cat.id) {
+        <button
+          type="button"
+          (click)="setCategory(cat.id)"
+          [class.filter-btn-active]="activeCategory() === cat.id"
+          class="filter-btn rounded-full px-5 py-2">
+          {{ cat.label }}
+        </button>
+      }
+    </div>
+
+    <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4">
+      @for (skill of filteredSkills(); track skill.name) {
+        @if (skill.url) {
+          <a
+            [href]="skill.url"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group flex flex-col items-center gap-4 rounded-2xl border border-white/10 bg-slate-900/60 p-6 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-brand-accent hover:bg-slate-900/90 hover:shadow-glow-accent">
+            <div class="flex h-16 w-16 items-center justify-center rounded-xl bg-slate-800/80 p-3 transition duration-300 group-hover:scale-110">
+              <img [src]="skill.icon" [alt]="skill.name + ' logo'" class="h-10 w-10 object-contain" loading="lazy" />
+            </div>
+            <span class="text-sm font-semibold text-slate-200 group-hover:text-white">{{ skill.name }}</span>
+          </a>
+        } @else {
+          <div class="group flex flex-col items-center gap-4 rounded-2xl border border-white/10 bg-slate-900/60 p-6 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-brand-accent/40 hover:bg-slate-900/90">
+            <div class="flex h-16 w-16 items-center justify-center rounded-xl bg-slate-800/80 p-3 transition duration-300 group-hover:scale-110">
+              <img [src]="skill.icon" [alt]="skill.name + ' logo'" class="h-10 w-10 object-contain" loading="lazy" />
+            </div>
+            <span class="text-sm font-semibold text-slate-200 group-hover:text-white">{{ skill.name }}</span>
+          </div>
+        }
+      }
+    </div>
+  </div>
+</section>

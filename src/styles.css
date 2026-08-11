@@ -1,9 +1,71 @@
-/* You can add global styles to this file, and also import other style files */
-@import "app/components/preloader/preloader.component.css";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body{
-    background: #4a4a48;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    color-scheme: dark light;
+  }
+
+  body {
+    @apply bg-brand-bg text-slate-100 font-sans antialiased transition-colors duration-300 selection:bg-brand-accent/30 selection:text-white;
+  }
+
+  /* Focus ring global styling for WCAG compliance */
+  :focus-visible {
+    @apply outline-none ring-2 ring-brand-accent ring-offset-2 ring-offset-brand-bg;
+  }
+}
+
+@layer components {
+  .section-shell {
+    @apply relative px-4 sm:px-6 lg:px-12 py-16 md:py-24 bg-brand-bg;
+  }
+
+  .section-heading {
+    @apply text-3xl sm:text-4xl md:text-5xl font-extrabold text-white text-center tracking-tight;
+  }
+
+  .section-subtitle {
+    @apply mt-4 max-w-3xl mx-auto text-center text-slate-400 text-base sm:text-lg leading-relaxed font-normal;
+  }
+
+  .glass-card {
+    @apply relative rounded-2xl border border-white/10 bg-slate-900/60 backdrop-blur-md p-6 sm:p-8 transition-all duration-300 hover:border-brand-accent/40 hover:bg-slate-900/80 hover:shadow-glow-accent;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2.5 rounded-full px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-brand-accent to-brand-secondary shadow-lg shadow-brand-accent/25 transition-all duration-300 hover:shadow-glow-accent hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2.5 rounded-full px-6 py-3 text-sm font-semibold text-slate-200 border border-white/20 bg-slate-900/40 backdrop-blur-sm transition-all duration-300 hover:border-brand-accent hover:text-white hover:bg-brand-accent/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent;
+  }
+
+  .nav-link {
+    @apply relative text-sm font-medium text-slate-300 transition-colors duration-200 hover:text-white focus:outline-none focus-visible:text-brand-accent-light;
+  }
+
+  .nav-link-active {
+    @apply text-brand-accent-light font-semibold;
+  }
+
+  .filter-btn {
+    @apply px-4 sm:px-6 py-2.5 text-xs sm:text-sm font-semibold tracking-wide text-slate-300 border border-white/10 bg-slate-900/50 backdrop-blur-sm transition-all duration-200 hover:border-brand-accent hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent;
+  }
+
+  .filter-btn-active {
+    @apply border-brand-accent bg-brand-accent/20 text-white shadow-glow-accent;
+  }
+
+  .project-card {
+    @apply flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-slate-900/60 backdrop-blur-md shadow-xl transition-all duration-300 hover:-translate-y-1.5 hover:border-brand-accent/50 hover:shadow-glow-accent;
+  }
+
+  .badge-tag {
+    @apply inline-flex items-center rounded-full bg-brand-accent/15 px-3 py-1 text-xs font-medium text-brand-accent-light border border-brand-accent/20;
+  }
 }

@@ -1,66 +1,36 @@
-import { Component } from '@angular/core';
-import { Router} from '@angular/router';
-
+import { Component, signal, inject, ChangeDetectionStrategy } from '@angular/core';
+import { ViewportScroller, NgClass } from '@angular/common';
+import { NAV_LINKS, PORTFOLIO } from '../../data/portfolio.data';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-header',
+  standalone: true,
+  imports: [NgClass],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrl: './header.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
-  constructor(private router: Router){}
-  mymail="dxtprabh87@gmail.com";
-  activeLink: string = ''; //active link
-  
-  //after click on education button it redirect to education compopent within same page and also url will be update according to education component
+  private readonly viewportScroller = inject(ViewportScroller);
+  readonly themeService = inject(ThemeService);
 
-  // Scrolls to a specific element and updates the URL
+  readonly portfolio = PORTFOLIO;
+  readonly navLinks = NAV_LINKS;
+  readonly activeLink = signal('home');
+  readonly menuOpen = signal(false);
+
   scrollToElement(elementId: string): void {
-    const element = document.getElementById(elementId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-      // Update URL based on the elementId
-      switch (elementId) {
-        case 'home':
-          this.router.navigate(['/home']);
-          break;
-        case 'education':
-          this.router.navigate(['/home/education']);
-          break;
-        case 'skill':
-          this.router.navigate(['/home/skill']);
-          break;
-        case 'project':
-          this.router.navigate(['/home/project']);
-          break;
-        case 'experience':
-          this.router.navigate(['/home/experience']);
-          break;
-        case 'contact':
-          this.router.navigate(['/home/contact']);
-          break;
-        
-        // add more cases as needed for other sections
-      }
-
-      this.setActive(elementId); // Update active link
-    }
+    this.viewportScroller.scrollToAnchor(elementId);
+    this.activeLink.set(elementId);
+    this.menuOpen.set(false);
   }
 
-  //active link on navigation 
-  setActive(link: string): void {
-    this.activeLink = link;
+  toggleMenu(): void {
+    this.menuOpen.update((open) => !open);
   }
 
-  //url change link
-  navigate(){
-    this.router.navigate(['/home'])
-  }
-  toggleMenu() {
-    const menu = document.getElementById('navbar-dropdown');
-    if (menu) {
-      menu.classList.toggle('hidden');
-    }
+  toggleTheme(): void {
+    this.themeService.toggleTheme();
   }
 }

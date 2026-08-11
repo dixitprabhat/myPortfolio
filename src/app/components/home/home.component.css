@@ -1,66 +1,8 @@
-body {
-  font-family: 'Space Mono', monospace;
-  
-}
-.grow-on-hover:hover {
-  transform: scale(0.9); /* Grow effect */
-  border: 4px solid rgb(120, 156, 134); /* light green border */
-  box-shadow: 0 0 15px rgb(33, 1, 33); /* Optional: Adds a glow effect */
-  transition: transform 0.3s ease, border 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for the effects */
+.profile-image {
+  transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
-.svg-text {
-  font-size: 200px; /* Updated font size to 250px */
-  font-family:monospace;
-  stroke-dasharray: 2000; /* Adjusted to better fit the new font size */
-  stroke-dashoffset: 2000;
-  animation: drawText 5s forwards, pulse 3s infinite; /* Added pulse animation */
-  width: 100vh;
-  height: 100vh;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: -1; /* Ensures SVG is in the background */
-  opacity: 0.1; /* Reduced opacity for subtlety */
-}
-
-@keyframes drawText {
-  to {
-      stroke-dashoffset: 0;
-  }
-}
-
-@keyframes pulse {
-  0%, 100% {
-    transform: translate(-50%, -50%) scale(1);
-  }
-  50% {
-    transform: translate(-50%, -50%) scale(1.1);
-  }
-}
-/* When viewport width is between 250px and 720px */
-@media (max-width: 640px) and (min-width: 250px) {
-  .text-lg {
-    margin-top:30px; /* Apply margin-top 30px within this range */
-  }
-}
-
-@media (min-width: 640px) and (max-width: 730px) {
-  .custom-home-class{
-    margin-bottom: -80px;
-
-  }
-}
-@media (min-width:  730px) and (max-width: 1500px) {
-  .custom-home-class{
-    margin-bottom: -120px;
-
-  }
-}
-@media (min-width:  1500px) and (max-width: 2500px) {
-  .custom-home-class{
-    margin-bottom: -100px;
-
-  }
+.profile-image:hover {
+  transform: scale(1.02);
+  border-color: rgb(139 92 246 / 0.5);
 }

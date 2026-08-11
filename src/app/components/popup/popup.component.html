@@ -1,33 +1,68 @@
-<!-- This div acts as the popup, showing based on 'isPopupOpen' -->
-<div class="fixed inset-0 bg-[#080f1] bg-opacity-50 z-50 flex justify-center items-center" *ngIf="isPopupOpen">
-  <div class="relative bg-gradient-to-r from-[#5E5368] to-[#000000]  p-5 rounded-lg shadow-lg">
-    <!-- Button to close the popup without downloading, placed at the top right corner -->
-    <button class="absolute top-0 right-0 m-2 p-1 bg-transparent border-none text-gray-100 hover:text-black-600"
-      (click)="closePopup()">
-      <img src="../../../assets/images/cancel.png" alt="Close" class="w-6 h-6 hover:w-8 hover:h-8">
-    </button>
-    <h2 class="text-lg font-bold mb-4 text-white">Curriculum Vitae</h2>
-    <p class="text-white">Thank you for reviewing my profile.</p>
-    <p class="text-white">I’m pleased to share my CV and look forward to exploring potential opportunities. </p>
-    <p class="text-white">You can reach out anytime for additional information.</p>
+<!-- Modal Trigger Button -->
+<button
+  type="button"
+  (click)="openPopup()"
+  class="btn-outline text-xs px-5 py-3">
+  Preview CV
+  <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+  </svg>
+</button>
 
-    <!-- Button to download the CV and close the popup -->
-    <a href="../../../assets/files/Prabhat Dixit.pdf" download
-      class="flex items-center justify-center mt-2 text-center py-2  px-4 bg-gradient-to-r from-[#422419] to-[#12100E] hover:text-lg hover:font-bold hover:border-2 hover:border-white  rounded-full text-white "
-      (click)="closePopup()">
-      Download<img class="ml-2 w-5 h-5 sm:w-7 sm:h-7" src="../../../assets/images/download.png" alt="Download Icon">
-    </a>
+<!-- Backdrop Modal Overlay -->
+@if (isPopupOpen()) {
+  <div
+    class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-md animate-fade-up"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-title">
+    <div class="relative w-full max-w-lg rounded-2xl border border-white/15 bg-slate-900 p-6 sm:p-8 shadow-2xl">
+      <!-- Close Icon Button -->
+      <button
+        type="button"
+        (click)="closePopup()"
+        aria-label="Close modal"
+        class="absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-slate-800 text-slate-400 transition hover:bg-slate-700 hover:text-white">
+        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
 
+      <!-- Content -->
+      <div class="flex items-center gap-3 mb-4">
+        <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-accent/20 text-brand-accent-light">
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+        </div>
+        <h2 id="modal-title" class="text-xl font-bold text-white tracking-tight">Curriculum Vitae — Prabhat Dixit</h2>
+      </div>
+
+      <p class="text-sm leading-relaxed text-slate-300">
+        Thank you for reviewing my profile! You can download my complete CV in PDF format detailing enterprise project experience, technical stack, and educational credentials.
+      </p>
+
+      <div class="mt-8 flex flex-col sm:flex-row items-center justify-end gap-3 pt-4 border-t border-white/10">
+        <button
+          type="button"
+          (click)="closePopup()"
+          class="btn-outline w-full sm:w-auto text-xs px-5 py-2.5">
+          Close
+        </button>
+
+        <a
+          [href]="portfolio.resumePath"
+          target="_blank"
+          download
+          (click)="closePopup()"
+          class="btn-primary w-full sm:w-auto text-xs px-6 py-2.5">
+          Download PDF
+          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+          </svg>
+        </a>
+      </div>
+    </div>
   </div>
-</div>
-
-<div class="flex items-center justify-center p-4">
-  <!-- Button to open the popup with an inline icon -->
-  <button style="z-index: 10;"
-    class="rounded-full relative inline-flex items-center justify-center px-5 py-2 text-sm sm:text-lg lg:text-xl font-medium text-white group overflow-hidden bg-gray focus:outline-none focus:ring-4 dark:focus:ring-black-500 transition duration-300 hover:bg-gradient-to-r from-white to-black to-black border-2 border-solid border-white-600 hover:from-[#3E5151] hover:to-[#DECBA4]"
-    (click)="openPopup()">
-    Access Resume
-    <img class="ml-2 w-5 h-5 sm:w-7 sm:h-7" src="../../../assets/images/download.png" alt="">
-  </button>
-
-</div>
+}

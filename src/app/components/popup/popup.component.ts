@@ -1,18 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
+import { PORTFOLIO } from '../../data/portfolio.data';
 
 @Component({
   selector: 'app-popup',
+  standalone: true,
   templateUrl: './popup.component.html',
-  styleUrl: './popup.component.css'
+  styleUrl: './popup.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PopupComponent {
-  isPopupOpen: boolean = false;
+  readonly portfolio = PORTFOLIO;
+  readonly isPopupOpen = signal(false);
 
   openPopup(): void {
-    this.isPopupOpen = true;
+    this.isPopupOpen.set(true);
   }
 
   closePopup(): void {
-    this.isPopupOpen = false;
+    this.isPopupOpen.set(false);
   }
 }
