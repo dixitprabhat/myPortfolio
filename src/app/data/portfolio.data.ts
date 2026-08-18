@@ -3,7 +3,9 @@ export type ProjectCategory = 'frontend' | 'fullstack';
 export interface ProjectCaseStudy {
   overview: string;
   role: string;
+  problemStatement?: string;
   keyContributions: string[];
+  challengesSolved?: string[];
   outcomes: string[];
   architectureFlow?: string[];
   starMetrics?: { label: string; value: string }[];
@@ -27,6 +29,8 @@ export interface Experience {
   period: string;
   image: string;
   description: string;
+  responsibilities?: string[];
+  keyAchievements?: string[];
   tags: string[];
   location?: string;
 }
@@ -53,11 +57,33 @@ export const PORTFOLIO = {
   tagline: 'Architecting scalable full-stack web applications with MongoDB, Express.js, Angular, Node.js & TypeScript',
   email: 'dxtprabh87@gmail.com',
   phone: '+91 9598 208 182',
-  location: 'Delhi, UP, India',
+  location: 'Delhi NCR, India',
   github: 'https://github.com/theprabhuofficial',
   linkedin: 'https://www.linkedin.com/in/dixitprabhat/',
   summary:
-    'Results-driven MEAN Stack Developer with hands-on experience engineering enterprise web applications, RESTful microservices, interactive dashboards, and database architectures using MongoDB, Express.js, Angular, Node.js, and TypeScript. Passionate about end-to-end full-stack architecture, scalable backends, clean code, accessibility, and high-performance UX.',
+    'Full-Stack MEAN Developer with 3+ years of commercial experience building enterprise web reporting systems, RESTful APIs, interactive dashboards, and database architectures using MongoDB, Express.js, Angular, Node.js, and TypeScript. Focused on scalable backends, clean component state, and high-performance user experiences.',
+  aboutDetails: {
+    title: 'Full-Stack MEAN Developer & Solutions Engineer',
+    bio: 'I specialize in engineering end-to-end full-stack web applications that bridge intuitive user interfaces with robust, scalable backend services. With a background in enterprise web reporting, Node.js/LoopBack API development, and MongoDB data aggregation, I craft clean, maintainable software optimized for performance and real-world impact.',
+    pillars: [
+      {
+        title: 'Full-Stack Architecture',
+        desc: 'Building seamless web apps using Angular, Node.js, Express.js, and MongoDB with end-to-end TypeScript type safety.',
+      },
+      {
+        title: 'Enterprise REST APIs',
+        desc: 'Designing scalable REST microservices, authentication middleware, and optimized database aggregation pipelines.',
+      },
+      {
+        title: 'Reactive Frontend UX',
+        desc: 'Crafting responsive single-page applications with Angular Signals, RxJS state management, and accessible styling.',
+      },
+      {
+        title: 'Clean Code & Reliability',
+        desc: 'Emphasizing modular design, database indexing, efficient payload delivery, and maintainable codebase structures.',
+      },
+    ],
+  },
   resumePath: 'assets/files/PrabhatDixit.pdf',
   availability: 'Available for Opportunities',
 } as const;
@@ -75,6 +101,8 @@ export const PROJECTS: Project[] = [
       overview:
         'Enterprise medical representative reporting interface built for pharmaceutical field operations, visualizing sales performance, doctor call logs, and target achievements.',
       role: 'Web Developer / Full Stack Lead',
+      problemStatement:
+        'Pharmaceutical sales teams required a real-time, responsive reporting portal to submit daily doctor call logs, inspect field analytics, and export monthly summaries without latency.',
       architectureFlow: [
         'Angular 17 Signals & RxJS',
         'LoopBack REST Microservices',
@@ -86,14 +114,18 @@ export const PROJECTS: Project[] = [
         { label: 'Active Field Reps', value: '500+ Users' },
       ],
       keyContributions: [
-        'Designed dynamic Angular reporting views & interactive chart dashboards',
-        'Integrated LoopBack REST APIs and optimized MongoDB database aggregation queries',
-        'Engineered automated client-side PDF and Excel export modules',
-        'Implemented state management using RxJS observables and Angular Signals',
+        'Designed dynamic Angular reporting views & interactive chart dashboards for field representatives.',
+        'Integrated LoopBack REST APIs and optimized MongoDB database aggregation queries for fast retrieval.',
+        'Engineered automated client-side PDF and Excel export modules for offline record-keeping.',
+        'Implemented reactive state management using RxJS observables and Angular Signals.',
+      ],
+      challengesSolved: [
+        'High-volume reporting data caused DOM rendering lag. Solved by implementing virtualized tables and reactive signals.',
+        'Complex MongoDB queries were slowing down backend responses; optimized indexes to reduce query execution time.',
       ],
       outcomes: [
-        'Improved report generation speed by 40%',
-        'Streamlined daily field reporting workflow for 500+ active field sales representatives',
+        'Improved report generation speed by 40%.',
+        'Streamlined daily field reporting workflow for 500+ active field sales representatives.',
       ],
     },
   },
@@ -111,6 +143,8 @@ export const PROJECTS: Project[] = [
       overview:
         'Modern content publishing and blog discovery portal designed with a mobile-first philosophy, clean typography, and interactive navigation drawer.',
       role: 'Frontend Engineer',
+      problemStatement:
+        'Readers needed a lightweight, high-performance content discovery web app that renders seamlessly on mobile devices with sub-second page loads.',
       architectureFlow: [
         'Semantic HTML5 Markup',
         'CSS Flexbox & Grid System',
@@ -122,13 +156,16 @@ export const PROJECTS: Project[] = [
         { label: 'Network Latency', value: '< 1 Sec 3G' },
       ],
       keyContributions: [
-        'Crafted semantic HTML5 markup and responsive CSS grid layout system',
-        'Implemented vanilla JavaScript event handlers for mobile drawer navigation',
-        'Optimized critical rendering path and CSS loading performance',
+        'Crafted semantic HTML5 markup and responsive CSS grid layout system.',
+        'Implemented vanilla JavaScript event handlers for mobile drawer navigation without external framework overhead.',
+        'Optimized critical rendering path and CSS loading performance.',
+      ],
+      challengesSolved: [
+        'Eliminated render-blocking assets to maintain a 100% mobile Lighthouse performance score.',
       ],
       outcomes: [
-        'Achieved 100% Google Lighthouse mobile usability rating',
-        'Sub-1-second initial load time on 3G network conditions',
+        'Achieved 100% Google Lighthouse mobile usability rating.',
+        'Sub-1-second initial load time on 3G network conditions.',
       ],
     },
   },
@@ -146,6 +183,8 @@ export const PROJECTS: Project[] = [
       overview:
         'Visual media gallery and photography homepage showcasing touch-enabled image sliders, lightbox modal previews, and responsive grid layouts.',
       role: 'UI Developer',
+      problemStatement:
+        'Showcasing high-resolution photo galleries on mobile devices without layout shifts or slow image download speeds.',
       architectureFlow: [
         'Bootstrap 5 Responsive Grid',
         'Touch Swipe Event Engine',
@@ -157,13 +196,16 @@ export const PROJECTS: Project[] = [
         { label: 'Viewport Fluidity', value: '100% Touch' },
       ],
       keyContributions: [
-        'Built responsive grid layouts using Bootstrap 5 and flexbox utilities',
-        'Integrated custom touch swipe sliders and image lightbox popups',
-        'Implemented lazy loading for high-resolution photo assets',
+        'Built responsive grid layouts using Bootstrap 5 and flexbox utilities.',
+        'Integrated custom touch swipe sliders and image lightbox popups.',
+        'Implemented lazy loading for high-resolution photo assets.',
+      ],
+      challengesSolved: [
+        'Optimized photo loading strategy to prevent content layout shifts during gallery expansion.',
       ],
       outcomes: [
-        'Enhanced visitor engagement time with touch-friendly lightbox galleries',
-        'Fluid cross-device rendering across mobile, tablet, and desktop viewports',
+        'Enhanced visitor engagement time with touch-friendly lightbox galleries.',
+        'Fluid cross-device rendering across mobile, tablet, and desktop viewports.',
       ],
     },
   },
@@ -180,6 +222,8 @@ export const PROJECTS: Project[] = [
       overview:
         'Movie exploration web application integrating the TMDB REST API to browse trending movies, filter by genre, and view details in modal views.',
       role: 'Frontend Developer',
+      problemStatement:
+        'Providing real-time query filtering across thousands of movie records with responsive UI feedback.',
       architectureFlow: [
         'React Functional Components',
         'TMDB REST Integration',
@@ -191,13 +235,16 @@ export const PROJECTS: Project[] = [
         { label: 'Catalog Index', value: '10,000+ Movies' },
       ],
       keyContributions: [
-        'Utilized React Hooks (useState, useEffect) for API state management',
-        'Implemented real-time client-side search query filtering',
-        'Designed custom CSS Modules for isolated component styling',
+        'Utilized React Hooks (useState, useEffect) for API state management.',
+        'Implemented real-time client-side search query filtering.',
+        'Designed custom CSS Modules for isolated component styling.',
+      ],
+      challengesSolved: [
+        'Prevented unnecessary API refetches by maintaining client search state.',
       ],
       outcomes: [
-        'Instant search responses across 10,000+ movie entries',
-        'Clean modular component architecture with isolated scoped styles',
+        'Instant search responses across 10,000+ movie entries.',
+        'Clean modular component architecture with isolated scoped styles.',
       ],
     },
   },
@@ -211,8 +258,14 @@ export const EXPERIENCES: Experience[] = [
     location: 'India',
     image: 'assets/images/ELOGO.jpg',
     description:
-      'Engineered enterprise web reporting interfaces for pharmaceutical field teams using Angular and TypeScript. Built complex interactive dashboards, custom dynamic filters, and high-volume data export features (PDF/Excel) while maintaining fast rendering performance.',
-    tags: ['Angular', 'TypeScript', 'Angular Material', 'RxJS', 'LoopBack API'],
+      'Engineering enterprise web reporting interfaces and microservice APIs for pharmaceutical field operations using Angular, Node.js, and TypeScript. Responsible for interactive dashboards, dynamic filtering engines, and automated data exports.',
+    keyAchievements: [
+      'Developed responsive Angular 17 single-page applications with custom RxJS observables and Angular Signals for reactive UI state.',
+      'Designed and integrated LoopBack REST API endpoints backed by MongoDB aggregation pipelines to process field sales analytics.',
+      'Engineered automated client-side PDF & Excel export features, accelerating daily field report generation speed by 40%.',
+      'Implemented robust form validation, accessibility (WCAG), and reusable component libraries across the enterprise app.',
+    ],
+    tags: ['Angular', 'TypeScript', 'Angular Material', 'RxJS', 'LoopBack API', 'MongoDB'],
   },
   {
     title: 'Technical Support & Database Management',
@@ -221,12 +274,25 @@ export const EXPERIENCES: Experience[] = [
     location: 'India',
     image: 'assets/images/edubridge.jpg',
     description:
-      'Managed MongoDB and SQL databases, optimized query execution speed, engineered data integrity constraints, and supported API integration workflows between Node.js/LoopBack backends and Angular frontends.',
+      'Managed MongoDB and SQL database environments, optimized query execution speeds, engineered data integrity constraints, and supported API integration workflows between backends and Angular frontends.',
+    keyAchievements: [
+      'Optimized MongoDB indexing and aggregation queries, improving API data retrieval times for large datasets.',
+      'Managed data integrity constraints, database backups, and schema updates across MySQL and MongoDB instances.',
+      'Provided end-to-end technical support and troubleshooting for RESTful microservices and frontend client connections.',
+    ],
     tags: ['MongoDB', 'MySQL', 'Node.js', 'Data Integrity', 'REST APIs'],
   },
 ];
 
 export const QUALIFICATIONS: Qualification[] = [
+  {
+    title: 'Master of Computer Applications (MCA)',
+    period: '2025 - Ongoing',
+    institution: 'Lovely Professional University',
+    description:
+      'Postgraduate degree specializing in advanced software engineering, cloud architecture, web application development, and database systems.',
+    badge: "Master's Degree",
+  },
   {
     title: 'NIELIT A-Level Certification',
     period: '2022',

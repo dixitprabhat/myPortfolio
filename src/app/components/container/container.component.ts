@@ -9,7 +9,6 @@ import { ContactComponent } from '../contact/contact.component';
 import { ToastComponent } from '../toast/toast.component';
 import { LanguageService } from '../../services/language.service';
 
-import { GithubStatsComponent } from '../github-stats/github-stats.component';
 import { MobileBarComponent } from '../mobile-bar/mobile-bar.component';
 
 @Component({
@@ -19,7 +18,6 @@ import { MobileBarComponent } from '../mobile-bar/mobile-bar.component';
     HomeComponent,
     EducationComponent,
     SkillsComponent,
-    GithubStatsComponent,
     ProjectsComponent,
     ExperienceComponent,
     ContactComponent,

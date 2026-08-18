@@ -256,6 +256,13 @@
       <!-- Modal Body -->
       @if (project.caseStudy; as cs) {
         <div class="mt-6 space-y-5 text-sm leading-relaxed" style="color: var(--text-body)">
+          @if (cs.problemStatement) {
+            <div>
+              <h4 class="text-xs font-mono uppercase tracking-wider font-semibold text-amber-400 mb-1">Problem & Business Challenge</h4>
+              <p class="text-xs sm:text-sm">{{ cs.problemStatement }}</p>
+            </div>
+          }
+
           <div>
             <h4 class="text-xs font-mono uppercase tracking-wider font-semibold text-sky-400 mb-1">Project Overview</h4>
             <p>{{ cs.overview }}</p>
@@ -316,6 +323,20 @@
               }
             </ul>
           </div>
+
+          @if (cs.challengesSolved && cs.challengesSolved.length > 0) {
+            <div>
+              <h4 class="text-xs font-mono uppercase tracking-wider font-semibold text-violet-400 mb-2">Key Technical Challenges Solved</h4>
+              <ul class="space-y-1.5">
+                @for (challenge of cs.challengesSolved; track challenge) {
+                  <li class="flex items-start gap-2 text-xs sm:text-sm">
+                    <span class="mt-1.5 h-1.5 w-1.5 rounded-full bg-violet-400 shrink-0"></span>
+                    <span>{{ challenge }}</span>
+                  </li>
+                }
+              </ul>
+            </div>
+          }
 
           <div>
             <h4 class="text-xs font-mono uppercase tracking-wider font-semibold text-emerald-400 mb-2">Key Outcomes & Impact</h4>

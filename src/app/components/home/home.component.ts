@@ -20,10 +20,10 @@ export class HomeComponent {
   readonly portfolio = PORTFOLIO;
 
   readonly stats = [
-    { value: '3+', label: 'Years Commercial Exp.', sublabel: 'Enterprise & Full-Stack' },
-    { value: '15+', label: 'Core Stack Techs', sublabel: 'Node, Angular, MongoDB, Express' },
+    { value: '3+', label: 'Years Commercial Exp.', sublabel: 'Full-Stack & Database' },
+    { value: '15+', label: 'Core Stack Techs', sublabel: 'MongoDB, Express, Angular, Node' },
     { value: '4+', label: 'Featured Projects', sublabel: 'Enterprise & Web Apps' },
-    { value: '100%', label: 'Clean Architecture', sublabel: 'Responsive & Accessible' },
+    { value: 'REST APIs', label: 'Backend Architecture', sublabel: 'Node.js, LoopBack, Express' },
   ];
 
   readonly recruiterInfo = [
