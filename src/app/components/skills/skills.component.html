@@ -147,14 +147,19 @@
       </div>
 
       <!-- Carousel Content Grid -->
-      <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 min-h-[160px] items-center">
+      <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 min-h-[170px] items-center">
         @for (skill of visibleSkills(); track skill.name) {
-          <div class="theme-icon-box group flex flex-col items-center justify-center gap-3 rounded-2xl border p-5 transition-all duration-300 hover:-translate-y-1 hover:border-sky-400 hover:shadow-glow">
+          <div class="theme-icon-box group flex flex-col items-center justify-center gap-2.5 rounded-2xl border p-5 transition-all duration-300 hover:-translate-y-1 hover:border-sky-400 hover:shadow-glow">
             <div class="flex h-14 w-14 items-center justify-center rounded-xl p-2 transition duration-300 group-hover:scale-110">
               <img [src]="skill.icon" [alt]="skill.name + ' logo'" class="h-10 w-10 object-contain" loading="lazy" />
             </div>
             <span class="text-sm font-semibold text-center transition-colors" style="color: var(--text-heading)">{{ skill.name }}</span>
-            <span class="badge-tag !px-2 !py-0.5 text-[10px] font-mono capitalize opacity-80">{{ skill.category }}</span>
+            <div class="flex flex-wrap items-center justify-center gap-1.5">
+              <span class="badge-tag !px-2 !py-0.5 text-[10px] font-mono capitalize opacity-80">{{ skill.category }}</span>
+              @if (skill.type) {
+                <span class="badge-tag !px-2 !py-0.5 text-[10px] font-mono text-sky-600 dark:text-sky-400 border border-sky-500/20 bg-sky-500/10">{{ skill.type }}</span>
+              }
+            </div>
           </div>
         }
       </div>

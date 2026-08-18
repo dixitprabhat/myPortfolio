@@ -47,25 +47,49 @@
         </span>
       </div>
 
+      <!-- Recruiter At-A-Glance Summary Pills -->
+      <div class="mt-6 p-3 rounded-2xl border border-sky-500/20 bg-sky-500/5 grid grid-cols-2 sm:grid-cols-4 gap-2 text-left">
+        @for (info of recruiterInfo; track info.label) {
+          <div class="flex items-center gap-2 p-1.5">
+            <span class="text-base">{{ info.icon }}</span>
+            <div class="flex flex-col">
+              <span class="text-[10px] font-mono uppercase tracking-wider opacity-75" style="color: var(--text-muted)">{{ info.label }}</span>
+              <span class="text-xs font-semibold leading-tight" style="color: var(--text-heading)">{{ info.value }}</span>
+            </div>
+          </div>
+        }
+      </div>
+
       <!-- Action Buttons -->
-      <div class="mt-8 flex flex-wrap items-center justify-center gap-4 lg:justify-start">
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-3.5 lg:justify-start">
         <button type="button" class="btn-primary shadow-lg shadow-indigo-500/25" (click)="scrollTo('projects')">
-          Explore Projects
+          {{ languageService.t.exploreProjectsBtn }}
           <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
           </svg>
         </button>
 
         <button type="button" class="btn-outline" (click)="scrollTo('contact')">
-          Get In Touch
+          {{ languageService.t.getInTouchBtn }}
         </button>
 
         <app-popup></app-popup>
       </div>
 
+      <!-- Key Metrics & Achievements Stat Grid -->
+      <div class="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-3.5 max-w-2xl">
+        @for (stat of stats; track stat.label) {
+          <div class="theme-icon-box p-3.5 rounded-2xl border flex flex-col items-center lg:items-start text-center lg:text-left transition-all duration-300 hover:-translate-y-1 hover:border-sky-400 hover:shadow-glow">
+            <span class="text-2xl font-extrabold tracking-tight bg-gradient-to-r from-sky-500 to-indigo-500 bg-clip-text text-transparent">{{ stat.value }}</span>
+            <span class="text-xs font-semibold mt-0.5" style="color: var(--text-heading)">{{ stat.label }}</span>
+            <span class="text-[10px] opacity-75 mt-0.5 line-clamp-1" style="color: var(--text-muted)">{{ stat.sublabel }}</span>
+          </div>
+        }
+      </div>
+
       <!-- Social Media Bar -->
-      <div class="mt-10 flex items-center justify-center gap-4 pt-6 border-t lg:justify-start" style="border-color: var(--border-subtle)">
-        <span class="text-xs font-semibold tracking-wider uppercase" style="color: var(--text-muted)">Connect With Me:</span>
+      <div class="mt-8 flex items-center justify-center gap-4 pt-6 border-t lg:justify-start" style="border-color: var(--border-subtle)">
+        <span class="text-xs font-semibold tracking-wider uppercase" style="color: var(--text-muted)">{{ languageService.t.connectWithMe }}</span>
         <a
           [href]="portfolio.github"
           target="_blank"

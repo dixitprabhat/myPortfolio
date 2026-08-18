@@ -1,43 +1,58 @@
 <header>
   <nav class="fixed top-0 left-0 z-50 w-full theme-nav border-b backdrop-blur-xl transition-all duration-300" aria-label="Main navigation">
-    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-2.5 sm:px-6 lg:px-8">
       <!-- Brand Logo & Identity -->
       <a
         href="/"
         (click)="scrollToElement('home'); $event.preventDefault()"
-        class="group flex items-center gap-3 focus:outline-none"
+        class="group flex items-center gap-3 focus:outline-none shrink-0"
         aria-label="Prabhat Dixit Home">
-        <div class="theme-icon-box relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl border p-1 shadow-sm transition-all duration-300 group-hover:border-indigo-500 group-hover:shadow-glow">
+        <div class="theme-icon-box relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl border p-1 shadow-sm transition-all duration-300 group-hover:border-indigo-500 group-hover:shadow-glow shrink-0">
           <img src="assets/images/synergy-1.png" class="h-8 w-auto object-contain" alt="Prabhat Dixit logo" />
         </div>
         <div class="flex flex-col">
-          <span class="text-base font-bold tracking-tight transition-colors group-hover:text-indigo-600 dark:group-hover:text-indigo-400" style="color: var(--text-heading)">Prabhat Dixit</span>
-          <span class="text-xs font-medium" style="color: var(--text-muted)">MEAN Stack Developer</span>
+          <span class="text-sm sm:text-base font-bold tracking-tight transition-colors group-hover:text-indigo-600 dark:group-hover:text-indigo-400 whitespace-nowrap" style="color: var(--text-heading)">Prabhat Dixit</span>
+          <span class="text-[11px] sm:text-xs font-medium whitespace-nowrap" style="color: var(--text-muted)">MEAN Stack Developer</span>
         </div>
       </a>
 
       <!-- Right Desktop Controls & Navigation -->
-      <div class="hidden items-center gap-6 md:flex">
-        <ul class="flex items-center gap-1 font-medium">
+      <div class="hidden items-center gap-2 lg:gap-4 xl:gap-5 md:flex">
+        <ul class="flex items-center gap-0.5 lg:gap-1 font-medium">
           @for (link of navLinks; track link.id) {
             <li>
               <button
                 type="button"
                 (click)="scrollToElement(link.id)"
                 [class.nav-link-active]="activeLink() === link.id"
-                class="nav-link rounded-full px-4 py-2 transition-colors">
-                {{ link.label }}
+                class="nav-link whitespace-nowrap rounded-full px-3 py-1.5 text-xs xl:px-4 xl:py-2 xl:text-sm transition-all duration-200">
+                {{ getNavLabel(link.id) }}
               </button>
             </li>
           }
         </ul>
+
+        <!-- Language Selector Toggle Button -->
+        <button
+          type="button"
+          (click)="toggleLanguage()"
+          aria-label="Toggle Language (English / Hindi)"
+          class="btn-outline !px-2.5 !py-1.5 text-xs font-mono font-bold rounded-full transition-all focus:outline-none flex items-center gap-1 shadow-sm shrink-0"
+          title="Switch Language (English / Hindi)">
+          <span [class.text-indigo-600]="languageService.currentLang() === 'en'" [class.dark:text-indigo-400]="languageService.currentLang() === 'en'" [class.opacity-40]="languageService.currentLang() !== 'en'">EN</span>
+          <span class="opacity-30">/</span>
+          <span [class.text-indigo-600]="languageService.currentLang() === 'hi'" [class.dark:text-indigo-400]="languageService.currentLang() === 'hi'" [class.opacity-40]="languageService.currentLang() !== 'hi'">हिन्दी</span>
+        </button>
+
+        <!-- Command Palette Trigger -->
+        <app-command-palette class="shrink-0"></app-command-palette>
 
         <!-- Theme Toggle Button -->
         <button
           type="button"
           (click)="toggleTheme()"
           [attr.aria-label]="themeService.currentTheme() === 'dark' ? 'Switch to Light Theme' : 'Switch to Dark Theme'"
-          class="btn-outline !px-0 !py-0 flex h-9 w-9 items-center justify-center rounded-full transition-all focus:outline-none"
+          class="btn-outline !px-0 !py-0 flex h-9 w-9 items-center justify-center rounded-full transition-all focus:outline-none shrink-0"
           title="Toggle Light/Dark Theme">
           @if (themeService.currentTheme() === 'dark') {
             <!-- Sun Icon -->
@@ -53,11 +68,11 @@
         </button>
 
         <a
-          href="assets/files/Prabhat Dixit.pdf"
+          [href]="portfolio.resumePath"
           target="_blank"
           rel="noopener noreferrer"
-          class="btn-primary text-xs px-5 py-2.5">
-          Resume
+          class="btn-primary text-xs px-4 py-2 xl:px-5 xl:py-2.5 whitespace-nowrap shrink-0">
+          {{ languageService.t.resumeBtn }}
           <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
           </svg>
@@ -65,7 +80,15 @@
       </div>
 
       <!-- Mobile Controls & Hamburger -->
-      <div class="flex items-center gap-3 md:hidden">
+      <div class="flex items-center gap-2 md:hidden">
+        <button
+          type="button"
+          (click)="toggleLanguage()"
+          aria-label="Toggle Language"
+          class="btn-outline !px-2 !py-1 text-xs font-mono font-bold rounded-lg flex items-center gap-0.5">
+          <span>{{ languageService.currentLang().toUpperCase() }}</span>
+        </button>
+
         <button
           type="button"
           (click)="toggleTheme()"
@@ -114,17 +137,17 @@
                 [class.nav-link-active]="activeLink() === link.id"
                 class="block w-full rounded-xl px-4 py-3 text-left font-medium transition hover:bg-indigo-500/10 hover:text-indigo-600 dark:hover:text-indigo-400"
                 style="color: var(--text-body)">
-                {{ link.label }}
+                {{ getNavLabel(link.id) }}
               </button>
             </li>
           }
-          <li class="mt-2 pt-2 border-t" style="border-color: var(--border-subtle)">
+          <li class="mt-2 pt-2 border-t flex flex-col gap-2" style="border-color: var(--border-subtle)">
             <a
-              href="assets/files/Prabhat Dixit.pdf"
+              [href]="portfolio.resumePath"
               target="_blank"
               rel="noopener noreferrer"
               class="btn-primary w-full py-3 text-xs">
-              Download Resume (PDF)
+              {{ languageService.t.resumeBtn }} (PDF)
             </a>
           </li>
         </ul>

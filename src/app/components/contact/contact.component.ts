@@ -4,6 +4,8 @@ import { NgClass } from '@angular/common';
 import { MailService } from '../../services/mail.service';
 import { environment } from '../../../environment';
 import { PORTFOLIO } from '../../data/portfolio.data';
+import { ToastService } from '../../services/toast.service';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-contact',
@@ -15,10 +17,20 @@ import { PORTFOLIO } from '../../data/portfolio.data';
 })
 export class ContactComponent {
   private readonly mailService = inject(MailService);
+  private readonly toastService = inject(ToastService);
   private readonly fb = inject(FormBuilder);
+  readonly languageService = inject(LanguageService);
 
   readonly portfolio = PORTFOLIO;
   readonly phoneUrl = 'tel:' + PORTFOLIO.phone.replace(/\s/g, '');
+
+  copyEmail(): void {
+    if (typeof navigator !== 'undefined' && navigator.clipboard) {
+      navigator.clipboard.writeText(this.portfolio.email).then(() => {
+        this.toastService.show(this.languageService.t.emailCopied);
+      });
+    }
+  }
 
   readonly userForm: FormGroup = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(2)]],
@@ -41,15 +53,16 @@ export class ContactComponent {
     const formData = new FormData();
     formData.append('name', this.userForm.get('name')?.value ?? '');
     formData.append('email', this.userForm.get('email')?.value ?? '');
-    formData.append('body', this.userForm.get('message')?.value ?? '');
+    formData.append('message', this.userForm.get('message')?.value ?? '');
     formData.append('access_key', environment.form_access_key);
     formData.append('subject', 'Portfolio Contact Form Message');
     formData.append('from_name', 'Prabhat Dixit Portfolio');
 
     try {
       const res = await this.mailService.sendEmail(formData);
-      if (!res.ok) {
-        throw new Error('Request failed');
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        throw new Error(data.message || 'Request failed');
       }
       this.alertMessage.set('Thank you! Your message has been sent successfully. I will get back to you shortly.');
       this.isFormSubmittedSuccessfully.set(true);

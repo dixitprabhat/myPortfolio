@@ -167,7 +167,7 @@
 
   .nav-link {
     color: var(--text-muted);
-    @apply relative text-sm font-medium transition-colors duration-200 focus:outline-none focus-visible:text-sky-400;
+    @apply relative text-sm font-medium transition-colors duration-200 focus:outline-none focus-visible:text-indigo-500 whitespace-nowrap;
   }
 
   .nav-link:hover {
@@ -175,8 +175,12 @@
   }
 
   .nav-link-active {
-    color: var(--text-heading) !important;
-    @apply font-bold;
+    color: #6366f1 !important;
+    @apply font-semibold;
+  }
+
+  :is(.dark) .nav-link-active {
+    color: #818cf8 !important;
   }
 
   .filter-btn {

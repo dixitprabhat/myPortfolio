@@ -2,66 +2,108 @@
 <button
   type="button"
   (click)="openPopup()"
-  class="btn-outline text-xs px-5 py-3">
-  Preview CV
-  <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  class="btn-outline text-xs px-5 py-3 flex items-center gap-2 shadow-sm"
+  aria-label="Preview Resume PDF">
+  <svg class="h-4 w-4 text-sky-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
   </svg>
+  <span>Preview CV</span>
 </button>
 
 <!-- Backdrop Modal Overlay -->
 @if (isPopupOpen()) {
   <div
-    class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/70 dark:bg-slate-950/85 p-4 backdrop-blur-md animate-fade-up"
+    class="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/80 p-3 sm:p-6 backdrop-blur-md animate-fade-up"
+    (click)="closePopup()"
     role="dialog"
     aria-modal="true"
     aria-labelledby="modal-title">
-    <div class="glass-card relative w-full max-w-lg shadow-2xl !p-6 sm:!p-8" style="background-color: var(--bg-modal)">
-      <!-- Close Icon Button -->
-      <button
-        type="button"
-        (click)="closePopup()"
-        aria-label="Close modal"
-        class="btn-outline !p-0 absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-full">
-        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </button>
-
-      <!-- Content -->
-      <div class="flex items-center gap-3 mb-4">
-        <div class="theme-icon-box flex h-10 w-10 items-center justify-center rounded-xl border text-indigo-600 dark:text-indigo-400">
-          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-          </svg>
+    <div
+      class="glass-card relative w-full max-w-4xl max-h-[90vh] flex flex-col rounded-3xl shadow-2xl overflow-hidden border border-sky-500/30"
+      style="background-color: var(--bg-modal)"
+      (click)="$event.stopPropagation()">
+      
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between p-4 sm:p-5 border-b shrink-0" style="border-color: var(--border-subtle)">
+        <div class="flex items-center gap-3">
+          <div class="theme-icon-box flex h-10 w-10 items-center justify-center rounded-xl border text-indigo-500 shadow-sm">
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+          </div>
+          <div>
+            <h2 id="modal-title" class="text-base sm:text-lg font-bold tracking-tight" style="color: var(--text-heading)">
+              Prabhat Dixit — Resume / CV
+            </h2>
+            <p class="text-xs" style="color: var(--text-muted)">
+              MEAN Stack Developer | 2+ Years Enterprise Experience
+            </p>
+          </div>
         </div>
-        <h2 id="modal-title" class="text-xl font-bold tracking-tight" style="color: var(--text-heading)">Curriculum Vitae — Prabhat Dixit</h2>
+
+        <div class="flex items-center gap-2">
+          <a
+            [href]="portfolio.resumePath"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-outline !p-2 rounded-xl text-xs flex items-center gap-1.5 hidden sm:flex"
+            title="Open in new tab">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+            <span>Full Tab</span>
+          </a>
+
+          <button
+            type="button"
+            (click)="closePopup()"
+            aria-label="Close modal"
+            class="btn-outline !p-2 flex h-9 w-9 items-center justify-center rounded-xl">
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
       </div>
 
-      <p class="text-sm leading-relaxed" style="color: var(--text-body)">
-        Thank you for reviewing my profile! You can download my complete CV in PDF format detailing enterprise project experience, technical stack, and educational credentials.
-      </p>
+      <!-- PDF Preview Container -->
+      <div class="relative w-full h-[60vh] sm:h-[70vh] bg-slate-900 overflow-hidden flex items-center justify-center">
+        @if (safeResumeUrl(); as url) {
+          <iframe
+            [src]="url"
+            class="w-full h-full border-0"
+            title="Prabhat Dixit Resume PDF Preview">
+          </iframe>
+        }
+      </div>
 
-      <div class="mt-8 flex flex-col sm:flex-row items-center justify-end gap-3 pt-4 border-t" style="border-color: var(--border-subtle)">
-        <button
-          type="button"
-          (click)="closePopup()"
-          class="btn-outline w-full sm:w-auto text-xs px-5 py-2.5">
-          Close
-        </button>
+      <!-- Modal Footer -->
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-3 p-4 border-t shrink-0" style="border-color: var(--border-subtle); background-color: var(--bg-card)">
+        <div class="text-xs flex items-center gap-2" style="color: var(--text-muted)">
+          <span class="inline-block h-2 w-2 rounded-full bg-emerald-500"></span>
+          <span>Verified Document • Updated 2026</span>
+        </div>
 
-        <a
-          [href]="portfolio.resumePath"
-          target="_blank"
-          download
-          (click)="closePopup()"
-          class="btn-primary w-full sm:w-auto text-xs px-6 py-2.5">
-          Download PDF
-          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-          </svg>
-        </a>
+        <div class="flex items-center gap-3 w-full sm:w-auto">
+          <button
+            type="button"
+            (click)="closePopup()"
+            class="btn-outline w-1/2 sm:w-auto text-xs px-5 py-2.5">
+            Close
+          </button>
+
+          <a
+            [href]="portfolio.resumePath"
+            target="_blank"
+            download
+            class="btn-primary w-1/2 sm:w-auto text-xs px-6 py-2.5 flex items-center justify-center gap-2">
+            <span>Download PDF</span>
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+          </a>
+        </div>
       </div>
     </div>
   </div>

@@ -1,5 +1,7 @@
-import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal, inject } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { PORTFOLIO } from '../../data/portfolio.data';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-popup',
@@ -9,10 +11,19 @@ import { PORTFOLIO } from '../../data/portfolio.data';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PopupComponent {
+  private readonly sanitizer = inject(DomSanitizer);
+  readonly languageService = inject(LanguageService);
   readonly portfolio = PORTFOLIO;
+
   readonly isPopupOpen = signal(false);
+  readonly safeResumeUrl = signal<SafeResourceUrl | null>(null);
 
   openPopup(): void {
+    if (!this.safeResumeUrl()) {
+      this.safeResumeUrl.set(
+        this.sanitizer.bypassSecurityTrustResourceUrl(this.portfolio.resumePath)
+      );
+    }
     this.isPopupOpen.set(true);
   }
 
@@ -20,3 +31,4 @@ export class PopupComponent {
     this.isPopupOpen.set(false);
   }
 }
+
