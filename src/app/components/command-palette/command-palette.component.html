@@ -1,0 +1,101 @@
+<!-- Command Palette Floating Trigger Badge -->
+<button
+  type="button"
+  (click)="open()"
+  class="btn-outline !py-1.5 !px-3 text-xs flex items-center gap-2 rounded-xl shadow-sm border border-indigo-500/30 hover:border-indigo-400"
+  aria-label="Open Command Palette (Cmd + K)">
+  <svg class="h-3.5 w-3.5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+  </svg>
+  <span class="hidden md:inline font-medium">Quick Actions</span>
+  <kbd class="hidden sm:inline-flex items-center rounded border border-slate-700 bg-slate-800/80 px-1.5 py-0.5 text-[10px] font-mono text-slate-300">
+    ⌘K
+  </kbd>
+</button>
+
+<!-- Command Palette Modal Overlay -->
+@if (isOpen()) {
+  <div
+    class="fixed inset-0 z-[120] flex items-start justify-center pt-16 sm:pt-24 p-4 bg-slate-950/80 backdrop-blur-md animate-fade-up"
+    (click)="close()"
+    role="dialog"
+    aria-modal="true">
+    <div
+      class="glass-card relative w-full max-w-xl shadow-2xl rounded-3xl overflow-hidden border border-sky-500/30 flex flex-col"
+      style="background-color: var(--bg-modal)"
+      (click)="$event.stopPropagation()">
+
+      <!-- Search Header Input -->
+      <div class="flex items-center gap-3 px-5 py-4 border-b shrink-0" style="border-color: var(--border-subtle)">
+        <svg class="h-5 w-5 text-sky-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+
+        <input
+          #searchInput
+          type="text"
+          [(ngModel)]="searchQuery"
+          placeholder="Type a command or search... (e.g. Resume, GitHub, Skills)"
+          class="w-full bg-transparent text-sm font-medium focus:outline-none"
+          style="color: var(--text-heading)" />
+
+        <button
+          type="button"
+          (click)="close()"
+          class="text-xs font-mono px-2 py-1 rounded bg-slate-800 text-slate-400 hover:text-white">
+          ESC
+        </button>
+      </div>
+
+      <!-- Command List -->
+      <div class="max-h-[60vh] overflow-y-auto p-2 divide-y" style="border-color: var(--border-subtle)">
+        @if (filteredActions().length === 0) {
+          <div class="p-8 text-center text-xs" style="color: var(--text-muted)">
+            No matching commands found.
+          </div>
+        } @else {
+          <div class="p-1 space-y-1">
+            @for (action of filteredActions(); track action.id; let i = $index) {
+              <button
+                type="button"
+                (click)="executeAction(action)"
+                class="w-full flex items-center justify-between px-4 py-3 rounded-2xl text-left transition-all duration-200 hover:bg-sky-500/10 group">
+                <div class="flex items-center gap-3">
+                  <div class="theme-icon-box flex h-8 w-8 items-center justify-center rounded-xl border text-sky-500 group-hover:scale-105 transition-transform">
+                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" [attr.d]="action.icon" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="text-xs sm:text-sm font-semibold" style="color: var(--text-heading)">
+                      {{ action.title }}
+                    </div>
+                    <div class="text-[10px] font-mono capitalize" style="color: var(--text-muted)">
+                      {{ action.category }}
+                    </div>
+                  </div>
+                </div>
+
+                @if (action.shortcut) {
+                  <span class="badge-tag !px-2 !py-0.5 text-[10px] font-mono">
+                    {{ action.shortcut }}
+                  </span>
+                } @else {
+                  <svg class="h-4 w-4 text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                }
+              </button>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Footer Info -->
+      <div class="px-5 py-3 border-t text-[11px] font-mono flex items-center justify-between shrink-0" style="border-color: var(--border-subtle); background-color: var(--bg-card); color: var(--text-muted)">
+        <span>Recruiter Quick Nav • ⌘K</span>
+        <span>MEAN Stack Developer</span>
+      </div>
+    </div>
+  </div>
+}

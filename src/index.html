@@ -1,18 +1,83 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
   <meta charset="utf-8">
-  <title>TechPortfolio</title>
+  <title>Prabhat Dixit | MEAN Stack Developer Portfolio</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="./assets/images/girl.png">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <meta name="description" content="Portfolio of Prabhat Dixit — MEAN Stack Developer specializing in MongoDB, Express.js, Angular 17, Node.js, TypeScript, RESTful microservices, and enterprise reporting dashboards.">
+  <meta name="author" content="Prabhat Dixit">
+  <meta name="keywords" content="Prabhat Dixit, MEAN Stack Developer, Full Stack Engineer, Angular Developer, Node.js, Express.js, MongoDB, TypeScript, Microservices, Enterprise Web Development">
 
+  <!-- OpenGraph Meta Tags -->
+  <meta property="og:title" content="Prabhat Dixit | MEAN Stack Developer">
+  <meta property="og:description" content="Architecting enterprise full-stack web applications with MongoDB, Express.js, Angular, Node.js, and TypeScript. View live demos, GitHub heatmap, and interactive case studies.">
+  <meta property="og:type" content="profile">
+  <meta property="og:image" content="assets/images/homePP.jpeg">
+  <meta property="og:url" content="https://github.com/theprabhuofficial">
+
+  <!-- Twitter Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Prabhat Dixit | MEAN Stack Developer Portfolio">
+  <meta name="twitter:description" content="Full-stack software developer engineering scalable web applications with Angular, Node, Express & MongoDB.">
+
+  <!-- JSON-LD Structured Data Schema for Search Engines -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Prabhat Dixit",
+      "jobTitle": "MEAN Stack Developer",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "MR Reporting"
+      },
+      "url": "https://github.com/theprabhuofficial",
+      "sameAs": [
+        "https://github.com/theprabhuofficial",
+        "https://www.linkedin.com/in/dixitprabhat/"
+      ],
+      "knowsAbout": [
+        "MongoDB",
+        "Express.js",
+        "Angular",
+        "Node.js",
+        "TypeScript",
+        "RxJS",
+        "REST APIs",
+        "LoopBack",
+        "Full-Stack Web Development"
+      ]
+    }
+  </script>
+
+  <meta name="color-scheme" content="light dark">
+  <script>
+    (function() {
+      try {
+        var savedTheme = localStorage.getItem('theme');
+        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+          document.documentElement.classList.add('dark');
+          document.documentElement.classList.remove('light');
+          document.documentElement.style.colorScheme = 'dark';
+        } else {
+          document.documentElement.classList.add('light');
+          document.documentElement.classList.remove('dark');
+          document.documentElement.style.colorScheme = 'light';
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="icon" type="image/png" href="assets/images/logo.png">
 </head>
-<body>
+<body class="antialiased selection:bg-indigo-500/30 selection:text-indigo-400">
+  <!-- Accessibility Skip Navigation Link -->
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-xl focus:bg-indigo-600 focus:px-5 focus:py-3 focus:font-semibold focus:text-white focus:shadow-lg">
+    Skip to main content
+  </a>
 
-  <app-root>
-    
-  </app-root>
+  <app-root></app-root>
 </body>
 </html>

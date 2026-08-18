@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { PopupComponent } from './popup.component';
 
 describe('PopupComponent', () => {
@@ -8,10 +7,9 @@ describe('PopupComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PopupComponent]
-    })
-    .compileComponents();
-    
+      imports: [PopupComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(PopupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -1,7 +1,0 @@
-.curved {
-    position: relative;
-    height: 8vh;
-    background: linear-gradient(90deg, #2a282830, #3f3f3f, rgb(69, 70, 70));
-    border-bottom-left-radius: 50% 100%;
-    border-bottom-right-radius: 50% 100%;
-}

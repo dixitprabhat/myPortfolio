@@ -1,6 +1,36 @@
-<app-home id="home"></app-home>
-<app-education id="education"> </app-education>
-<app-skils id="skill"></app-skils>
-<app-projects id="project"></app-projects>
-<app-experience id="experience"></app-experience>
-<app-contact id="contact"></app-contact>
+<!-- Fixed Top Scroll Reading Progress Indicator -->
+<div class="fixed top-[57px] left-0 z-50 h-[3px] w-full bg-transparent pointer-events-none" aria-hidden="true">
+  <div
+    class="h-full bg-gradient-to-r from-sky-500 via-indigo-500 to-emerald-500 transition-all duration-150 ease-out shadow-glow"
+    [style.width.%]="scrollProgress()">
+  </div>
+</div>
+
+<main id="main-content" tabindex="-1" class="focus:outline-none">
+  <app-home id="home"></app-home>
+  <app-skils id="skills"></app-skils>
+  <app-projects id="projects"></app-projects>
+  <app-experience id="experience"></app-experience>
+  <app-education id="education"></app-education>
+  <app-contact id="contact"></app-contact>
+</main>
+
+<!-- Floating Back-To-Top Button -->
+@if (showBackToTop()) {
+  <button
+    type="button"
+    (click)="scrollToTop()"
+    class="fixed bottom-6 right-6 z-40 flex h-12 w-12 items-center justify-center rounded-2xl border border-sky-500/30 bg-slate-900/80 text-sky-400 shadow-2xl backdrop-blur-xl transition-all duration-300 hover:scale-110 hover:border-sky-400 hover:bg-sky-500 hover:text-white focus:outline-none animate-fade-up"
+    [attr.aria-label]="languageService.t.backToTop"
+    [title]="languageService.t.backToTop">
+    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7" />
+    </svg>
+  </button>
+}
+
+<!-- Mobile Quick Action Bottom Bar -->
+<app-mobile-bar></app-mobile-bar>
+
+<!-- Global Toast Notification Container -->
+<app-toast></app-toast>

@@ -1,40 +1,23 @@
-<footer class="bg-gradient-to-br from-white-450 via-gray-900 to-black-950 text-white py-5 px-4 font-sans relative">
-  <!-- SVG Wave Animation -->
-  <svg class="editorial absolute bottom-0 left-0 z-0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none">
-    <defs>
-      <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s58 18 88 18 58-18 88-18 58 18 88 18v44h-352z" />
-    </defs>
-    <g class="parallax1">
-      <use xlink:href="#gentle-wave" x="50" y="3" fill="#1f1f1f"/>
-    </g>
-    <g class="parallax2">
-      <use xlink:href="#gentle-wave" x="50" y="0" fill="#333"/>
-    </g>
-    <g class="parallax3">
-      <use xlink:href="#gentle-wave" x="50" y="9" fill="#4a4a4a"/>
-    </g>
-    <g class="parallax4">
-      <use xlink:href="#gentle-wave" x="50" y="6" fill="#252525"/>  
-    </g>
-  </svg>
+<footer class="relative theme-nav border-t py-12 px-4 font-sans transition-colors duration-300">
+  <div class="mx-auto max-w-7xl flex flex-col items-center justify-between gap-6 sm:flex-row">
+    <!-- Left Identity -->
+    <div class="flex flex-col items-center text-center sm:items-start sm:text-left">
+      <p class="text-lg font-bold tracking-tight" style="color: var(--text-heading)">{{ portfolio.name }}</p>
+      <p class="text-xs mt-1" style="color: var(--text-muted)">
+        &copy; {{ currentYear }} {{ portfolio.name }}. All rights reserved. Built with Angular & TypeScript.
+      </p>
+    </div>
 
-  <!-- Footer Content -->
-  <div class="text-center relative z-10">
-    <h6 class="text-base font-semibold tracking-widest">Prabhat Dixit</h6>
-
-
-    <ul class="flex flex-wrap justify-center gap-x-2 gap-y-2 my-2">
-      <li><a href="https://github.com/theprabhuofficial" target="_blank" class="text-xl hover:text-gray-400">
-          <img src="../../../assets/images/Github.gif"/>
-      </a></li>
-      <li><a href="https://www.linkedin.com/in/dixitprabhat/" target="_blank" class="text-xl hover:text-gray-400">
-          <img src="../../../assets/images/Linkedin.gif"/>
-      </a></li>
-      <!-- <li><a href="https://x.com/BShriTamrakar" target="_blank" class="text-xl hover:text-gray-400">
-          <img src="../../../assets/images/Twitterx.gif" style="width: 50px; height: 50px;"/>
-      </a></li> -->
-    </ul>
-
-    <p class="text-base mb-5">&copy; Dec-2024<a href='#' target='_blank' class="hover:underline mx-2 ">{{text_message}}</a></p>
+    <!-- Right Back to Top Button -->
+    <button
+      type="button"
+      (click)="scrollToTop()"
+      aria-label="Scroll back to top"
+      class="btn-outline text-xs px-4 py-2 flex items-center gap-2 rounded-full shadow-sm">
+      Back to Top
+      <svg class="h-4 w-4 text-indigo-600 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+      </svg>
+    </button>
   </div>
 </footer>

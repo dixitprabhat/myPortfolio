@@ -1,168 +1,80 @@
+<section id="experience" class="section-shell">
+  <div class="mx-auto max-w-6xl">
+    <div class="mb-14 text-center">
+      <div class="theme-icon-box mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl border text-indigo-600 dark:text-indigo-400 shadow-sm">
+        <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+      </div>
+      <h2 class="section-heading">Professional Experience</h2>
+      <p class="section-subtitle">
+        Proven track record of building production enterprise web applications, managing MongoDB & Node.js backends, and delivering high-value MEAN stack features.
+      </p>
+    </div>
 
+    <div class="space-y-8">
+      @for (job of experiences; track job.title + job.period) {
+        <article class="glass-card flex flex-col gap-6 lg:flex-row lg:items-center">
+          <!-- Left Logo / Image -->
+          <div class="flex-shrink-0">
+            <div class="theme-icon-box flex h-24 w-24 items-center justify-center overflow-hidden rounded-2xl border p-2 shadow-md">
+              <img
+                [src]="job.image"
+                [alt]="job.company + ' logo'"
+                class="h-full w-full object-contain"
+                loading="lazy" />
+            </div>
+          </div>
 
-  <div class="bg-[#080f1]">
-    <svg class="h-24 w-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" preserveAspectRatio="none">
-      <path class="text-black-750 fill-current" fill-opacity="0.99"
-            d="M0,288L60,245.3C120,203,240,117,360,112C480,107,600,181,720,229.3C840,277,960,299,1080,256C1200,213,1320,107,1380,53.3L1440,0L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
-    </svg>
+          <!-- Right Details -->
+          <div class="flex-1">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <h3 class="text-2xl font-bold tracking-tight" style="color: var(--text-heading)">{{ job.title }}</h3>
+                <p class="text-sm font-semibold flex items-center gap-2 mt-0.5" style="color: var(--text-accent)">
+                  {{ job.company }}
+                  @if (job.location) {
+                    <span class="text-xs font-normal" style="color: var(--text-muted)">• {{ job.location }}</span>
+                  }
+                </p>
+              </div>
+
+              <span class="badge-tag shadow-sm">
+                <svg class="mr-1.5 h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                {{ job.period }}
+              </span>
+            </div>
+
+            <p class="mt-4 text-base leading-relaxed" style="color: var(--text-body)">
+              {{ job.description }}
+            </p>
+
+            @if (job.keyAchievements && job.keyAchievements.length > 0) {
+              <div class="mt-4 pt-3 border-t" style="border-color: var(--border-subtle)">
+                <h4 class="text-xs font-mono uppercase tracking-wider font-semibold text-sky-500 mb-2">Key Technical Achievements & Impact</h4>
+                <ul class="space-y-2">
+                  @for (ach of job.keyAchievements; track ach) {
+                    <li class="flex items-start gap-2.5 text-xs sm:text-sm leading-relaxed" style="color: var(--text-body)">
+                      <span class="mt-1.5 h-1.5 w-1.5 rounded-full bg-emerald-500 shrink-0"></span>
+                      <span>{{ ach }}</span>
+                    </li>
+                  }
+                </ul>
+              </div>
+            }
+
+            <ul class="mt-5 flex flex-wrap gap-2" aria-label="Technologies used in role">
+              @for (tag of job.tags; track tag) {
+                <li class="badge-tag">
+                  {{ tag }}
+                </li>
+              }
+            </ul>
+          </div>
+        </article>
+      }
+    </div>
   </div>
-  
-
-<!-- Experience one -->
-<section class="flex flex-col justify-center items-center antialiased bg-[#080f1] text-gray-200 pt-3 lg:pt-8">
-    <h1 class="flex items-center justify-center mx-auto font-extrabold text-xl sm:text-3xl md:text-5xl lg:text-6xl text-white">
-        <img src="../../../assets/images/experience_icon.png" alt="Education Icon" class="w-7 h-7 md:w-12 md:h-12 lg:w-16 lg:h-16 mr-2">
-        <!-- Add mr-2 for a little margin right -->
-        <span class="text-transparent bg-clip-text bg-gradient-to-br from-gray-700 text-gray-700 to-white pr-2 md:pb-2 lg:pb-2 ">Experience</span>
-    </h1>
 </section>
-
-<!-- Tech Astha Experience -->
-<section class="flex flex-col justify-center antialiased bg-[#080f1] text-gray-200 pt-3 lg:pt-8">
-    <div class="max-w-6xl mx-auto p-4 sm:px-6 h-full">
-        <!-- Blog post -->
-        <article class="max-w-sm mx-auto md:max-w-none grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 xl:gap-16 items-center">
-            <a class="relative block group">
-                <div class="absolute inset-0 bg-gray-800 hidden md:block transform md:translate-y-2 md:translate-x-4 xl:translate-y-4 xl:translate-x-8 group-hover:translate-x-0 group-hover:translate-y-0 transition duration-700 ease-out pointer-events-none" aria-hidden="true"></div>
-                <figure class="relative h-0 pb-[56.25%] md:pb-[75%] lg:pb-[56.25%] overflow-hidden transform md:-translate-y-2 xl:-translate-y-4 group-hover:translate-x-0 group-hover:translate-y-0 transition duration-700 ease-out">
-                    <img class="absolute inset-0 w-full h-full object-cover transform hover:scale-105 transition duration-700 ease-out" src="../../../assets/images/ELOGO.jpg" width="540" height="303" alt="Blog post">
-                </figure>
-            </a>
-            <div>
-                <header>
-                    <div class="mb-3">
-                        <ul class="flex flex-wrap text-xs font-medium -m-1">
-                            <li class="m-1">
-                                <a class="inline-flex text-center text-gray-100 py-1 px-3 rounded-full bg-pink-600 hover:bg-pink-800 transition duration-150 ease-in-out" href="#0">Angular</a>
-                            </li>
-                            <li class="m-1">
-                                <a class="inline-flex text-center text-gray-100 py-1 px-3 rounded-full bg-purple-600 hover:bg-purple-700 transition duration-150 ease-in-out" href="#0">Java Script</a>
-                            </li>
-                            <li class="m-1">
-                                <a class="inline-flex text-center text-gray-100 py-1 px-3 rounded-full bg-green-600 hover:bg-green-800 transition duration-150 ease-in-out" href="#0">Angular Material</a>
-                            </li>
-                            <li class="m-1">
-                                <a class="inline-flex text-center text-gray-100 py-1 px-3 rounded-full bg-orange-600 hover:bg-orange-800 transition duration-150 ease-in-out" href="#0">CSS/HTML</a>
-                            </li>
-                            <li class="m-1">
-                                <a class="inline-flex text-center text-gray-100 py-1 px-3 rounded-full bg-blue-500 hover:bg-blue-600 transition duration-150 ease-in-out" href="#0">LoopBack</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <h3 class="text-2xl lg:text-3xl font-bold leading-tight mb-2">
-                        <a class="hover:text-gray-100 transition duration-150 ease-in-out" href="#0">Web Developer</a>
-                    </h3>
-                </header>
-                <p class="text-lg text-gray-400 flex-grow">
-                    I work as a Front-End Web Developer for MR Reporting, a software that helps pharmaceutical sales reps generate and track reports. I focus on building interactive dashboards, implementing advanced filtering, and enabling report exports (Excel/PDF). Using Angular, TypeScript, and RESTful APIs, I’ve optimized performance and improved UI/UX design, enhancing the user experience and efficiency.</p>
-                <footer class="flex items-center mt-4">
-                    <div>
-                        <a class="font-medium text-gray-200 hover:text-gray-100 transition duration-150 ease-in-out" href="#0">From</a>
-                        <span class="text-gray-500"> Sep 01, 2023</span>
-                        <span class="text-gray-700"> - </span>
-                        <span class="text-gray-500">Present</span>
-                    </div>
-                </footer>
-            </div>
-        </article>    
-    </div>
-</section>
-
-
-<!-- Edubridge Traineeing -->
-<section class="flex flex-col justify-center antialiased bg-[#080f1] text-gray-200 pt-10 ">
-    <div class="max-w-6xl mx-auto p-4 sm:px-6 h-full">
-        <!-- Blog post -->
-        <article class="max-w-sm mx-auto md:max-w-none grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 xl:gap-16 items-center">
-            <a class="relative block group">
-                <div class="absolute inset-0 bg-gray-800 hidden md:block transform md:translate-y-2 md:translate-x-4 xl:translate-y-4 xl:translate-x-8 group-hover:translate-x-0 group-hover:translate-y-0 transition duration-700 ease-out pointer-events-none" aria-hidden="true"></div>
-                <figure class="relative h-0 pb-[56.25%] md:pb-[75%] lg:pb-[56.25%] overflow-hidden transform md:-translate-y-2 xl:-translate-y-4 group-hover:translate-x-0 group-hover:translate-y-0 transition duration-700 ease-out">
-                    <img class="absolute inset-0 w-full h-full object-cover transform hover:scale-105 transition duration-700 ease-out" src="../../../assets/images/ELOGO.jpg" width="540" height="303" alt="Blog post">
-                </figure>
-            </a>
-            <div>
-                <header>
-                    <div class="mb-3">
-                        <ul class="flex flex-wrap text-xs font-medium -m-1">
-                            <li class="m-1">
-                                <a class="inline-flex text-center text-gray-100 py-1 px-3 rounded-full bg-pink-600 hover:bg-pink-800 transition duration-150 ease-in-out" href="#0">MongoDB</a>
-                            </li>
-                            <li class="m-1">
-                                <a class="inline-flex text-center text-gray-100 py-1 px-3 rounded-full bg-purple-600 hover:bg-purple-700 transition duration-150 ease-in-out" href="#0">MySQL</a>
-                            </li>
-                            <li class="m-1">
-                                <a class="inline-flex text-center text-gray-100 py-1 px-3 rounded-full bg-green-600 hover:bg-green-800 transition duration-150 ease-in-out" href="#0">MS-Office</a>
-                            </li>
-                            <!-- <li class="m-1">
-                                <a class="inline-flex text-center text-gray-100 py-1 px-3 rounded-full bg-orange-600 hover:bg-orange-800 transition duration-150 ease-in-out" href="#0">Mysql</a>
-                            </li>
-                            <li class="m-1">
-                                <a class="inline-flex text-center text-gray-100 py-1 px-3 rounded-full bg-blue-500 hover:bg-blue-600 transition duration-150 ease-in-out" href="#0">GitHub</a>
-                            </li> -->
-                        </ul>
-                    </div>
-                    <h3 class="text-2xl lg:text-3xl font-bold leading-tight mb-2">
-                        <a class="hover:text-gray-100 transition duration-150 ease-in-out" href="#0">Technical Support & Database Management</a>
-                    </h3>
-                </header>
-                <p class="text-lg text-gray-400 flex-grow">I worked in Database Management for MR Reporting, handling MongoDB and SQL. My responsibilities included designing and optimizing database schemas, writing efficient queries, ensuring data integrity, and managing large datasets. I also implemented backup strategies and ensured smooth integration between the database and front-end application.</p>
-                <footer class="flex items-center mt-4">
-                    <div>
-                        <a class="font-medium text-gray-200 hover:text-gray-100 transition duration-150 ease-in-out" href="#0">From</a>
-                        <span class="text-gray-500"> May 09, 2022</span>
-                        <span class="text-gray-700"> - </span>
-                        <span class="text-gray-500">Aug 31, 2023</span>
-                    </div>
-                </footer>
-            </div>
-        </article>    
-    </div>
-</section>
-
-
-<!-- EData Exposys Internship -->
-<!-- <section class="flex flex-col justify-center antialiased bg-gray-900 text-gray-200 pt-10 pb-10">
-    <div class="max-w-6xl mx-auto p-4 sm:px-6 h-full">
-        
-        <article class="max-w-sm mx-auto md:max-w-none grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 xl:gap-16 items-center">
-            <a class="relative block group">
-                <div class="absolute inset-0 bg-gray-800 hidden md:block transform md:translate-y-2 md:translate-x-4 xl:translate-y-4 xl:translate-x-8 group-hover:translate-x-0 group-hover:translate-y-0 transition duration-700 ease-out pointer-events-none" aria-hidden="true"></div>
-                <figure class="relative h-0 pb-[56.25%] md:pb-[75%] lg:pb-[56.25%] overflow-hidden transform md:-translate-y-2 xl:-translate-y-4 group-hover:translate-x-0 group-hover:translate-y-0 transition duration-700 ease-out">
-                    <img class="absolute inset-0 w-full h-full object-cover transform hover:scale-105 transition duration-700 ease-out" src="../../../assets/images/data.png" width="540" height="303" alt="Blog post">
-                </figure>
-            </a>
-            <div>
-                <header>
-                    <div class="mb-3">
-                        <ul class="flex flex-wrap text-xs font-medium -m-1">
-                            <li class="m-1">
-                                <a class="inline-flex text-center text-gray-100 py-1 px-3 rounded-full bg-pink-600 hover:bg-pink-800 transition duration-150 ease-in-out" href="#0">Python</a>
-                            </li>
-                            <li class="m-1">
-                                <a class="inline-flex text-center text-gray-100 py-1 px-3 rounded-full bg-purple-600 hover:bg-purple-700 transition duration-150 ease-in-out" href="#0">Django</a>
-                            </li>
-                            <li class="m-1">
-                                <a class="inline-flex text-center text-gray-100 py-1 px-3 rounded-full bg-green-600 hover:bg-green-800 transition duration-150 ease-in-out" href="#0">Java script</a>
-                            </li>
-                            
-                        </ul>
-                    </div>
-                    <h3 class="text-2xl lg:text-3xl font-bold leading-tight mb-2">
-                        <a class="hover:text-gray-100 transition duration-150 ease-in-out">Web Developer Intern</a>
-                    </h3>
-                </header>
-                <p class="text-lg text-gray-400 flex-grow">
-                    Throughout my internship, I gained invaluable hands-on experience with Python and the Django framework. I also created a portfolio website using this framework, along with HTML, CSS, JavaScript, and Bootstrap.</p>
-                <footer class="flex items-center mt-4">
-                    <div>
-                        <a class="font-medium text-gray-200 hover:text-gray-100 transition duration-150 ease-in-out" href="#0">From</a>
-                        <span class="text-gray-500"> Apr 12, 2022</span>
-                        <span class="text-gray-700"> - </span>
-                        <span class="text-gray-500">May 06, 2022</span>
-                    </div>
-                </footer>
-            </div>
-        </article>    
-    </div>
-</section> -->
-

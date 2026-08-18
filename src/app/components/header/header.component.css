@@ -1,40 +1,30 @@
-/*stickey navbar */
-
-/* In your navigation.component.css */
-
-  .link {
-    color: white; /* Default color */
-    cursor: pointer;
-    position: relative;
-    display: inline-block; /* Ensures the link can contain the absolutely positioned ::after element */
-    text-decoration: none; /* Removes the default underline */
-}
-.link::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 100%; /* Start with no visible underline */
-    bottom: -5px; /* Adjust position if needed */
-    height: 2px; /* Consistent thickness of the underline */
-    background-image: linear-gradient(to right, black, purple, white); /* Gradient underline */
-    display: block;
-    transition: right 0.5s ease-in-out; /* Smoother and slower transition for the underline */
+.nav-link {
+  position: relative;
+  white-space: nowrap;
 }
 
-.link:hover::after, .link:focus::after {
-    right: 0; /* Extends the underline across the element on hover/focus */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  width: 0;
+  height: 2.5px;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899);
+  border-radius: 9999px;
+  transform: translateX(-50%);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
 }
 
-.link:hover, .link:focus, .active-link {
-    color: yellow; /* Uniform highlight color on hover, focus, and active */
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+  width: 45%;
+  opacity: 0.7;
 }
 
-.active-link {
-    font-weight: bold; /* Bold for active link */
-    text-decoration: none; /* Ensure no default underline is shown */
+.nav-link-active::after {
+  width: 75% !important;
+  opacity: 1 !important;
 }
 
-.active-link::after {
-    right: 0; /* Ensure the underline is fully visible when active */
-    transition: none; /* No transition needed for the active state */
-}

@@ -1,47 +1,35 @@
-import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, Observable, timer } from 'rxjs';
-import { delay, take } from 'rxjs/operators';
-import { NavigationStart, Router } from '@angular/router';
+import { Component, OnInit, signal, ChangeDetectionStrategy, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { NavigationStart, Router, RouterOutlet } from '@angular/router';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet, HeaderComponent, FooterComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
-  title = 'TechEnthusiast';
-  isLoading=true;
-  showHead: boolean = false;
-  
-  ngOnInit() {
-    setTimeout(() => {
-      this.isLoading = false;
-    }, 1000);
-    
-  }
-
-
+  private readonly platformId = inject(PLATFORM_ID);
+  readonly isLoading = signal(true);
+  readonly showHead = signal(true);
 
   constructor(private router: Router) {
-  // on route change to '/login', set the variable showHead to false
-    router.events.forEach((event) => {
+    this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
-        if (event['url'] == '/leetcode') {
-          this.showHead = false;
-        } else {
-          // console.log("NU")
-          this.showHead = true;
-        }
+        this.showHead.set(event.url !== '/leetcode');
       }
     });
   }
-//   hideAnimatedDiv() {
-//     let animatedDiv:any = document.getElementById('scroll-animation');
-//     animatedDiv.style.display = 'block';
-//     setTimeout(() => {
-//       console.log('hide');
-//       animatedDiv.style.display = 'none';
-//     }, 3000);
-//  }
- 
+
+  ngOnInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      requestAnimationFrame(() => this.isLoading.set(false));
+    } else {
+      this.isLoading.set(false);
+    }
+  }
 }

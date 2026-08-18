@@ -1,3 +1,51 @@
 <app-leetcode-header></app-leetcode-header>
-<button  (click)="back_to_home()" >back</button>
-<h1 class=" text-9xl text-white mt-10">Leetcode home page </h1>
+
+<main class="section-shell min-h-[85vh]">
+  <div class="mx-auto max-w-6xl">
+    <div class="mb-12 text-center">
+      <h2 class="section-heading">Data Structures & Algorithm Solutions</h2>
+      <p class="section-subtitle">
+        Consistency tracker and algorithmic solution archive covering arrays, trees, dynamic programming, graphs, and system design patterns.
+      </p>
+    </div>
+
+    <!-- Stats Dashboard Grid -->
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-3 mb-12">
+      <div class="glass-card text-center">
+        <span class="block text-3xl font-extrabold text-amber-600 dark:text-amber-400">100+</span>
+        <span class="text-xs font-semibold uppercase tracking-wider mt-1 block" style="color: var(--text-muted)">Problems Solved</span>
+      </div>
+
+      <div class="glass-card text-center">
+        <span class="block text-3xl font-extrabold text-emerald-600 dark:text-emerald-400">Top 15%</span>
+        <span class="text-xs font-semibold uppercase tracking-wider mt-1 block" style="color: var(--text-muted)">Algorithmic Efficiency</span>
+      </div>
+
+      <div class="glass-card text-center">
+        <span class="block text-3xl font-extrabold text-indigo-600 dark:text-indigo-400">TypeScript / JS</span>
+        <span class="text-xs font-semibold uppercase tracking-wider mt-1 block" style="color: var(--text-muted)">Primary Stack</span>
+      </div>
+    </div>
+
+    <!-- Coming Soon Banner -->
+    <div class="glass-card p-10 text-center">
+      <div class="theme-icon-box mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl border text-amber-600 dark:text-amber-400">
+        <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+        </svg>
+      </div>
+      <h3 class="text-2xl font-bold tracking-tight" style="color: var(--text-heading)">DSA Playground & Code Walkthroughs</h3>
+      <p class="mt-2 text-sm max-w-xl mx-auto" style="color: var(--text-body)">
+        Individual solution breakdowns with Time & Space complexity analysis ($O(N \log N)$), code snippets, and LeetCode link references are being synchronized.
+      </p>
+      <div class="mt-6">
+        <button
+          type="button"
+          (click)="backToHome()"
+          class="btn-primary text-xs px-6 py-3">
+          Return to Main Portfolio
+        </button>
+      </div>
+    </div>
+  </div>
+</main>

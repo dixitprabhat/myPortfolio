@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { LeetcodeHeaderComponent } from './leetcode-header.component';
+import { provideRouter } from '@angular/router';
 
 describe('LeetcodeHeaderComponent', () => {
   let component: LeetcodeHeaderComponent;
@@ -8,10 +8,10 @@ describe('LeetcodeHeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [LeetcodeHeaderComponent]
-    })
-    .compileComponents();
-    
+      imports: [LeetcodeHeaderComponent],
+      providers: [provideRouter([])],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(LeetcodeHeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
